@@ -1,20 +1,107 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Phase2
 {
     public partial class Form1 : Form
     {
+        private readonly FormChild child = new FormChild();
+
         public Form1()
         {
             InitializeComponent();
+
+            // 子ウィンドウの「幅・高さ」の設定上限は画面サイズとする
+            trackBarWindowWidth.Maximum = Screen.PrimaryScreen.Bounds.Width;
+            trackBarWindowHeight.Maximum = Screen.PrimaryScreen.Bounds.Height;
+
+            // 子ウィンドウ表示
+            child.Show();
+        }
+
+        private int getSubValue(int currentValue, int distanceValue, int offsetValue = 0)
+        {
+            int determiningValue = currentValue - distanceValue - offsetValue;
+            if (determiningValue < 0)
+            {
+                // 座標が負値になる場合、画面端に張り付く
+                determiningValue = 0;
+            }
+
+            return determiningValue;
+        }
+
+        private int getAddValue(int maxValue, int currentValue, int distanceValue, int offsetValue = 0)
+        {
+            int determiningValue = currentValue + distanceValue;
+            if ( determiningValue > maxValue - offsetValue)
+            {
+                // 座標が画角を超える場合、画面端に張り付く
+                determiningValue = maxValue - offsetValue;
+            }
+
+            return determiningValue;
+        }
+
+        private void updatePosition(object sender, EventArgs e)
+        {
+            if (sender.Equals(this.buttonMoveDirectionUp))
+            {
+                child.Top = getSubValue(child.Top, trackBarMoveDistance.Value);
+            }
+            else if (sender.Equals(this.buttonMoveDirectionDown))
+            {
+                child.Top = getAddValue(trackBarWindowHeight.Maximum, child.Top, trackBarMoveDistance.Value, child.Height);
+            }
+            else if (sender.Equals(this.buttonMoveDirectionLeft))
+            {
+                child.Left = getSubValue(child.Left, trackBarMoveDistance.Value);
+            }
+            else if (sender.Equals(this.buttonMoveDirectionRight))
+            {
+                child.Left = getAddValue(trackBarWindowWidth.Maximum, child.Left, trackBarMoveDistance.Value, child.Width);
+            }
+            else // buttonMoveDirectionCentor
+            {
+                child.Left = (trackBarWindowWidth.Maximum + child.Width) / 2;
+                child.Top = (trackBarWindowHeight.Maximum + child.Height) / 2;
+            }
+        }
+
+        private void checkBoxVisible_CheckedChanged(object sender, EventArgs e)
+        {
+            child.Visible = checkBoxVisible.Checked;
+        }
+
+        private void trackBarMoveDistance_Scroll(object sender, EventArgs e)
+        {
+            labelMoveDistanceValue.Text = trackBarMoveDistance.Value.ToString();
+        }
+
+        private void updateRectSize(object sender, EventArgs e)
+        {
+            child.Width = trackBarWindowWidth.Value;
+            child.Height = trackBarWindowHeight.Value;
+
+            labelWindowWidthValue.Text = trackBarWindowWidth.Value.ToString();
+            labelWindowHeightValue.Text = trackBarWindowHeight.Value.ToString();
+        }
+
+        private void updateColor(object sender, EventArgs e)
+        {
+            drawFillChildBackColor();
+            labelWindowColorRedValue.Text = trackBarWindowColorRed.Value.ToString();
+            labelWindowColorGreenValue.Text = trackBarWindowColorGreen.Value.ToString();
+            labelWindowColorBlueValue.Text = trackBarWindowColorBlue.Value.ToString();
+        }
+
+        private void drawFillChildBackColor()
+        {
+            child.BackColor = Color.FromArgb(
+                trackBarWindowColorRed.Value,
+                trackBarWindowColorGreen.Value,
+                trackBarWindowColorBlue.Value);
         }
     }
 }

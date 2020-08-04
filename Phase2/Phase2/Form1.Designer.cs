@@ -30,21 +30,21 @@
         {
             this.buttonMoveDirectionUp = new System.Windows.Forms.Button();
             this.groupBoxMoveDirection = new System.Windows.Forms.GroupBox();
-            this.buttonMoveDirectionLeft = new System.Windows.Forms.Button();
-            this.buttonMoveDirectionCentor = new System.Windows.Forms.Button();
-            this.buttonMoveDirectionRight = new System.Windows.Forms.Button();
             this.buttonMoveDirectionDown = new System.Windows.Forms.Button();
+            this.buttonMoveDirectionRight = new System.Windows.Forms.Button();
+            this.buttonMoveDirectionCentor = new System.Windows.Forms.Button();
+            this.buttonMoveDirectionLeft = new System.Windows.Forms.Button();
             this.checkBoxVisible = new System.Windows.Forms.CheckBox();
             this.groupBoxSetWindow = new System.Windows.Forms.GroupBox();
-            this.trackBarMoveDistance = new System.Windows.Forms.TrackBar();
-            this.labelMoveDistanceName = new System.Windows.Forms.Label();
-            this.labelMoveDistanceValue = new System.Windows.Forms.Label();
-            this.labelWindowWidthValue = new System.Windows.Forms.Label();
-            this.labelWindowWidthName = new System.Windows.Forms.Label();
-            this.trackBarWindowWidth = new System.Windows.Forms.TrackBar();
             this.labelWindowHeightValue = new System.Windows.Forms.Label();
             this.labelWindowHeightName = new System.Windows.Forms.Label();
             this.trackBarWindowHeight = new System.Windows.Forms.TrackBar();
+            this.labelWindowWidthValue = new System.Windows.Forms.Label();
+            this.labelWindowWidthName = new System.Windows.Forms.Label();
+            this.trackBarWindowWidth = new System.Windows.Forms.TrackBar();
+            this.labelMoveDistanceValue = new System.Windows.Forms.Label();
+            this.labelMoveDistanceName = new System.Windows.Forms.Label();
+            this.trackBarMoveDistance = new System.Windows.Forms.TrackBar();
             this.groupBoxSetColor = new System.Windows.Forms.GroupBox();
             this.labelWindowColorBlueValue = new System.Windows.Forms.Label();
             this.labelWindowColorBlueName = new System.Windows.Forms.Label();
@@ -57,9 +57,9 @@
             this.trackBarWindowColorRed = new System.Windows.Forms.TrackBar();
             this.groupBoxMoveDirection.SuspendLayout();
             this.groupBoxSetWindow.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarMoveDistance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarWindowWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarWindowHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarWindowWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarMoveDistance)).BeginInit();
             this.groupBoxSetColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarWindowColorBlue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarWindowColorGreen)).BeginInit();
@@ -74,6 +74,7 @@
             this.buttonMoveDirectionUp.TabIndex = 0;
             this.buttonMoveDirectionUp.Text = "↑";
             this.buttonMoveDirectionUp.UseVisualStyleBackColor = true;
+            this.buttonMoveDirectionUp.Click += new System.EventHandler(this.updatePosition);
             // 
             // groupBoxMoveDirection
             // 
@@ -89,23 +90,15 @@
             this.groupBoxMoveDirection.TabStop = false;
             this.groupBoxMoveDirection.Text = "子ウィンドウ位置制御";
             // 
-            // buttonMoveDirectionLeft
+            // buttonMoveDirectionDown
             // 
-            this.buttonMoveDirectionLeft.Location = new System.Drawing.Point(18, 81);
-            this.buttonMoveDirectionLeft.Name = "buttonMoveDirectionLeft";
-            this.buttonMoveDirectionLeft.Size = new System.Drawing.Size(50, 50);
-            this.buttonMoveDirectionLeft.TabIndex = 1;
-            this.buttonMoveDirectionLeft.Text = "←";
-            this.buttonMoveDirectionLeft.UseVisualStyleBackColor = true;
-            // 
-            // buttonMoveDirectionCentor
-            // 
-            this.buttonMoveDirectionCentor.Location = new System.Drawing.Point(72, 81);
-            this.buttonMoveDirectionCentor.Name = "buttonMoveDirectionCentor";
-            this.buttonMoveDirectionCentor.Size = new System.Drawing.Size(50, 50);
-            this.buttonMoveDirectionCentor.TabIndex = 2;
-            this.buttonMoveDirectionCentor.Text = "・";
-            this.buttonMoveDirectionCentor.UseVisualStyleBackColor = true;
+            this.buttonMoveDirectionDown.Location = new System.Drawing.Point(72, 133);
+            this.buttonMoveDirectionDown.Name = "buttonMoveDirectionDown";
+            this.buttonMoveDirectionDown.Size = new System.Drawing.Size(50, 50);
+            this.buttonMoveDirectionDown.TabIndex = 4;
+            this.buttonMoveDirectionDown.Text = "↓";
+            this.buttonMoveDirectionDown.UseVisualStyleBackColor = true;
+            this.buttonMoveDirectionDown.Click += new System.EventHandler(this.updatePosition);
             // 
             // buttonMoveDirectionRight
             // 
@@ -115,25 +108,40 @@
             this.buttonMoveDirectionRight.TabIndex = 3;
             this.buttonMoveDirectionRight.Text = "→";
             this.buttonMoveDirectionRight.UseVisualStyleBackColor = true;
+            this.buttonMoveDirectionRight.Click += new System.EventHandler(this.updatePosition);
             // 
-            // buttonMoveDirectionDown
+            // buttonMoveDirectionCentor
             // 
-            this.buttonMoveDirectionDown.Location = new System.Drawing.Point(72, 133);
-            this.buttonMoveDirectionDown.Name = "buttonMoveDirectionDown";
-            this.buttonMoveDirectionDown.Size = new System.Drawing.Size(50, 50);
-            this.buttonMoveDirectionDown.TabIndex = 4;
-            this.buttonMoveDirectionDown.Text = "↓";
-            this.buttonMoveDirectionDown.UseVisualStyleBackColor = true;
+            this.buttonMoveDirectionCentor.Location = new System.Drawing.Point(72, 81);
+            this.buttonMoveDirectionCentor.Name = "buttonMoveDirectionCentor";
+            this.buttonMoveDirectionCentor.Size = new System.Drawing.Size(50, 50);
+            this.buttonMoveDirectionCentor.TabIndex = 2;
+            this.buttonMoveDirectionCentor.Text = "・";
+            this.buttonMoveDirectionCentor.UseVisualStyleBackColor = true;
+            this.buttonMoveDirectionCentor.Click += new System.EventHandler(this.updatePosition);
+            // 
+            // buttonMoveDirectionLeft
+            // 
+            this.buttonMoveDirectionLeft.Location = new System.Drawing.Point(18, 81);
+            this.buttonMoveDirectionLeft.Name = "buttonMoveDirectionLeft";
+            this.buttonMoveDirectionLeft.Size = new System.Drawing.Size(50, 50);
+            this.buttonMoveDirectionLeft.TabIndex = 1;
+            this.buttonMoveDirectionLeft.Text = "←";
+            this.buttonMoveDirectionLeft.UseVisualStyleBackColor = true;
+            this.buttonMoveDirectionLeft.Click += new System.EventHandler(this.updatePosition);
             // 
             // checkBoxVisible
             // 
             this.checkBoxVisible.AutoSize = true;
+            this.checkBoxVisible.Checked = true;
+            this.checkBoxVisible.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxVisible.Location = new System.Drawing.Point(223, 12);
             this.checkBoxVisible.Name = "checkBoxVisible";
             this.checkBoxVisible.Size = new System.Drawing.Size(150, 22);
             this.checkBoxVisible.TabIndex = 1;
             this.checkBoxVisible.Text = "子ウィンドウ表示";
             this.checkBoxVisible.UseVisualStyleBackColor = true;
+            this.checkBoxVisible.CheckedChanged += new System.EventHandler(this.checkBoxVisible_CheckedChanged);
             // 
             // groupBoxSetWindow
             // 
@@ -153,74 +161,19 @@
             this.groupBoxSetWindow.TabStop = false;
             this.groupBoxSetWindow.Text = "子ウィンドウ座標制御";
             // 
-            // trackBarMoveDistance
-            // 
-            this.trackBarMoveDistance.AutoSize = false;
-            this.trackBarMoveDistance.Location = new System.Drawing.Point(129, 37);
-            this.trackBarMoveDistance.Minimum = 1;
-            this.trackBarMoveDistance.Name = "trackBarMoveDistance";
-            this.trackBarMoveDistance.Size = new System.Drawing.Size(106, 30);
-            this.trackBarMoveDistance.TabIndex = 2;
-            this.trackBarMoveDistance.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarMoveDistance.Value = 1;
-            // 
-            // labelMoveDistanceName
-            // 
-            this.labelMoveDistanceName.AutoSize = true;
-            this.labelMoveDistanceName.Location = new System.Drawing.Point(17, 42);
-            this.labelMoveDistanceName.Name = "labelMoveDistanceName";
-            this.labelMoveDistanceName.Size = new System.Drawing.Size(71, 18);
-            this.labelMoveDistanceName.TabIndex = 0;
-            this.labelMoveDistanceName.Text = "移動量：";
-            // 
-            // labelMoveDistanceValue
-            // 
-            this.labelMoveDistanceValue.Location = new System.Drawing.Point(88, 42);
-            this.labelMoveDistanceValue.Name = "labelMoveDistanceValue";
-            this.labelMoveDistanceValue.Size = new System.Drawing.Size(40, 18);
-            this.labelMoveDistanceValue.TabIndex = 1;
-            this.labelMoveDistanceValue.Text = "000";
-            // 
-            // labelWindowWidthValue
-            // 
-            this.labelWindowWidthValue.Location = new System.Drawing.Point(88, 78);
-            this.labelWindowWidthValue.Name = "labelWindowWidthValue";
-            this.labelWindowWidthValue.Size = new System.Drawing.Size(40, 18);
-            this.labelWindowWidthValue.TabIndex = 4;
-            this.labelWindowWidthValue.Text = "000";
-            // 
-            // labelWindowWidthName
-            // 
-            this.labelWindowWidthName.AutoSize = true;
-            this.labelWindowWidthName.Location = new System.Drawing.Point(17, 78);
-            this.labelWindowWidthName.Name = "labelWindowWidthName";
-            this.labelWindowWidthName.Size = new System.Drawing.Size(35, 18);
-            this.labelWindowWidthName.TabIndex = 3;
-            this.labelWindowWidthName.Text = "幅：";
-            // 
-            // trackBarWindowWidth
-            // 
-            this.trackBarWindowWidth.AutoSize = false;
-            this.trackBarWindowWidth.Location = new System.Drawing.Point(129, 73);
-            this.trackBarWindowWidth.Minimum = 1;
-            this.trackBarWindowWidth.Name = "trackBarWindowWidth";
-            this.trackBarWindowWidth.Size = new System.Drawing.Size(106, 30);
-            this.trackBarWindowWidth.TabIndex = 5;
-            this.trackBarWindowWidth.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarWindowWidth.Value = 1;
-            // 
             // labelWindowHeightValue
             // 
-            this.labelWindowHeightValue.Location = new System.Drawing.Point(88, 119);
+            this.labelWindowHeightValue.Location = new System.Drawing.Point(83, 119);
             this.labelWindowHeightValue.Name = "labelWindowHeightValue";
-            this.labelWindowHeightValue.Size = new System.Drawing.Size(40, 18);
+            this.labelWindowHeightValue.Size = new System.Drawing.Size(50, 18);
             this.labelWindowHeightValue.TabIndex = 7;
-            this.labelWindowHeightValue.Text = "000";
+            this.labelWindowHeightValue.Text = "200";
+            this.labelWindowHeightValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelWindowHeightName
             // 
             this.labelWindowHeightName.AutoSize = true;
-            this.labelWindowHeightName.Location = new System.Drawing.Point(17, 119);
+            this.labelWindowHeightName.Location = new System.Drawing.Point(12, 119);
             this.labelWindowHeightName.Name = "labelWindowHeightName";
             this.labelWindowHeightName.Size = new System.Drawing.Size(47, 18);
             this.labelWindowHeightName.TabIndex = 6;
@@ -229,13 +182,76 @@
             // trackBarWindowHeight
             // 
             this.trackBarWindowHeight.AutoSize = false;
-            this.trackBarWindowHeight.Location = new System.Drawing.Point(129, 114);
+            this.trackBarWindowHeight.Location = new System.Drawing.Point(135, 114);
+            this.trackBarWindowHeight.Maximum = 1000;
             this.trackBarWindowHeight.Minimum = 1;
             this.trackBarWindowHeight.Name = "trackBarWindowHeight";
             this.trackBarWindowHeight.Size = new System.Drawing.Size(106, 30);
             this.trackBarWindowHeight.TabIndex = 8;
             this.trackBarWindowHeight.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarWindowHeight.Value = 1;
+            this.trackBarWindowHeight.Value = 200;
+            // 
+            // labelWindowWidthValue
+            // 
+            this.labelWindowWidthValue.Location = new System.Drawing.Point(83, 78);
+            this.labelWindowWidthValue.Name = "labelWindowWidthValue";
+            this.labelWindowWidthValue.Size = new System.Drawing.Size(50, 18);
+            this.labelWindowWidthValue.TabIndex = 4;
+            this.labelWindowWidthValue.Text = "300";
+            this.labelWindowWidthValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelWindowWidthName
+            // 
+            this.labelWindowWidthName.AutoSize = true;
+            this.labelWindowWidthName.Location = new System.Drawing.Point(12, 78);
+            this.labelWindowWidthName.Name = "labelWindowWidthName";
+            this.labelWindowWidthName.Size = new System.Drawing.Size(35, 18);
+            this.labelWindowWidthName.TabIndex = 3;
+            this.labelWindowWidthName.Text = "幅：";
+            // 
+            // trackBarWindowWidth
+            // 
+            this.trackBarWindowWidth.AutoSize = false;
+            this.trackBarWindowWidth.Location = new System.Drawing.Point(135, 73);
+            this.trackBarWindowWidth.Maximum = 1000;
+            this.trackBarWindowWidth.Minimum = 1;
+            this.trackBarWindowWidth.Name = "trackBarWindowWidth";
+            this.trackBarWindowWidth.Size = new System.Drawing.Size(106, 30);
+            this.trackBarWindowWidth.TabIndex = 5;
+            this.trackBarWindowWidth.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBarWindowWidth.Value = 300;
+            this.trackBarWindowWidth.Scroll += new System.EventHandler(this.updateRectSize);
+            // 
+            // labelMoveDistanceValue
+            // 
+            this.labelMoveDistanceValue.Location = new System.Drawing.Point(83, 42);
+            this.labelMoveDistanceValue.Name = "labelMoveDistanceValue";
+            this.labelMoveDistanceValue.Size = new System.Drawing.Size(50, 18);
+            this.labelMoveDistanceValue.TabIndex = 1;
+            this.labelMoveDistanceValue.Text = "100";
+            this.labelMoveDistanceValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelMoveDistanceName
+            // 
+            this.labelMoveDistanceName.AutoSize = true;
+            this.labelMoveDistanceName.Location = new System.Drawing.Point(12, 42);
+            this.labelMoveDistanceName.Name = "labelMoveDistanceName";
+            this.labelMoveDistanceName.Size = new System.Drawing.Size(71, 18);
+            this.labelMoveDistanceName.TabIndex = 0;
+            this.labelMoveDistanceName.Text = "移動量：";
+            // 
+            // trackBarMoveDistance
+            // 
+            this.trackBarMoveDistance.AutoSize = false;
+            this.trackBarMoveDistance.Location = new System.Drawing.Point(135, 37);
+            this.trackBarMoveDistance.Maximum = 100;
+            this.trackBarMoveDistance.Minimum = 1;
+            this.trackBarMoveDistance.Name = "trackBarMoveDistance";
+            this.trackBarMoveDistance.Size = new System.Drawing.Size(106, 30);
+            this.trackBarMoveDistance.TabIndex = 2;
+            this.trackBarMoveDistance.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBarMoveDistance.Value = 100;
+            this.trackBarMoveDistance.Scroll += new System.EventHandler(this.trackBarMoveDistance_Scroll);
             // 
             // groupBoxSetColor
             // 
@@ -257,16 +273,17 @@
             // 
             // labelWindowColorBlueValue
             // 
-            this.labelWindowColorBlueValue.Location = new System.Drawing.Point(88, 119);
+            this.labelWindowColorBlueValue.Location = new System.Drawing.Point(93, 119);
             this.labelWindowColorBlueValue.Name = "labelWindowColorBlueValue";
             this.labelWindowColorBlueValue.Size = new System.Drawing.Size(40, 18);
             this.labelWindowColorBlueValue.TabIndex = 7;
-            this.labelWindowColorBlueValue.Text = "000";
+            this.labelWindowColorBlueValue.Text = "128";
+            this.labelWindowColorBlueValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelWindowColorBlueName
             // 
             this.labelWindowColorBlueName.AutoSize = true;
-            this.labelWindowColorBlueName.Location = new System.Drawing.Point(17, 119);
+            this.labelWindowColorBlueName.Location = new System.Drawing.Point(12, 119);
             this.labelWindowColorBlueName.Name = "labelWindowColorBlueName";
             this.labelWindowColorBlueName.Size = new System.Drawing.Size(56, 18);
             this.labelWindowColorBlueName.TabIndex = 6;
@@ -275,26 +292,29 @@
             // trackBarWindowColorBlue
             // 
             this.trackBarWindowColorBlue.AutoSize = false;
-            this.trackBarWindowColorBlue.Location = new System.Drawing.Point(129, 114);
+            this.trackBarWindowColorBlue.Location = new System.Drawing.Point(135, 114);
+            this.trackBarWindowColorBlue.Maximum = 255;
             this.trackBarWindowColorBlue.Minimum = 1;
             this.trackBarWindowColorBlue.Name = "trackBarWindowColorBlue";
             this.trackBarWindowColorBlue.Size = new System.Drawing.Size(106, 30);
             this.trackBarWindowColorBlue.TabIndex = 8;
             this.trackBarWindowColorBlue.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarWindowColorBlue.Value = 1;
+            this.trackBarWindowColorBlue.Value = 128;
+            this.trackBarWindowColorBlue.Scroll += new System.EventHandler(this.updateColor);
             // 
             // labelWindowColorGreenValue
             // 
-            this.labelWindowColorGreenValue.Location = new System.Drawing.Point(88, 78);
+            this.labelWindowColorGreenValue.Location = new System.Drawing.Point(93, 78);
             this.labelWindowColorGreenValue.Name = "labelWindowColorGreenValue";
             this.labelWindowColorGreenValue.Size = new System.Drawing.Size(40, 18);
             this.labelWindowColorGreenValue.TabIndex = 4;
-            this.labelWindowColorGreenValue.Text = "000";
+            this.labelWindowColorGreenValue.Text = "128";
+            this.labelWindowColorGreenValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelWindowColorGreenName
             // 
             this.labelWindowColorGreenName.AutoSize = true;
-            this.labelWindowColorGreenName.Location = new System.Drawing.Point(17, 78);
+            this.labelWindowColorGreenName.Location = new System.Drawing.Point(12, 78);
             this.labelWindowColorGreenName.Name = "labelWindowColorGreenName";
             this.labelWindowColorGreenName.Size = new System.Drawing.Size(57, 18);
             this.labelWindowColorGreenName.TabIndex = 3;
@@ -303,26 +323,29 @@
             // trackBarWindowColorGreen
             // 
             this.trackBarWindowColorGreen.AutoSize = false;
-            this.trackBarWindowColorGreen.Location = new System.Drawing.Point(129, 73);
+            this.trackBarWindowColorGreen.Location = new System.Drawing.Point(135, 73);
+            this.trackBarWindowColorGreen.Maximum = 255;
             this.trackBarWindowColorGreen.Minimum = 1;
             this.trackBarWindowColorGreen.Name = "trackBarWindowColorGreen";
             this.trackBarWindowColorGreen.Size = new System.Drawing.Size(106, 30);
             this.trackBarWindowColorGreen.TabIndex = 5;
             this.trackBarWindowColorGreen.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarWindowColorGreen.Value = 1;
+            this.trackBarWindowColorGreen.Value = 128;
+            this.trackBarWindowColorGreen.Scroll += new System.EventHandler(this.updateColor);
             // 
             // labelWindowColorRedValue
             // 
-            this.labelWindowColorRedValue.Location = new System.Drawing.Point(88, 42);
+            this.labelWindowColorRedValue.Location = new System.Drawing.Point(93, 42);
             this.labelWindowColorRedValue.Name = "labelWindowColorRedValue";
             this.labelWindowColorRedValue.Size = new System.Drawing.Size(40, 18);
             this.labelWindowColorRedValue.TabIndex = 1;
-            this.labelWindowColorRedValue.Text = "000";
+            this.labelWindowColorRedValue.Text = "128";
+            this.labelWindowColorRedValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelWindowColorRedName
             // 
             this.labelWindowColorRedName.AutoSize = true;
-            this.labelWindowColorRedName.Location = new System.Drawing.Point(17, 42);
+            this.labelWindowColorRedName.Location = new System.Drawing.Point(12, 42);
             this.labelWindowColorRedName.Name = "labelWindowColorRedName";
             this.labelWindowColorRedName.Size = new System.Drawing.Size(56, 18);
             this.labelWindowColorRedName.TabIndex = 0;
@@ -331,13 +354,15 @@
             // trackBarWindowColorRed
             // 
             this.trackBarWindowColorRed.AutoSize = false;
-            this.trackBarWindowColorRed.Location = new System.Drawing.Point(129, 37);
+            this.trackBarWindowColorRed.Location = new System.Drawing.Point(135, 37);
+            this.trackBarWindowColorRed.Maximum = 255;
             this.trackBarWindowColorRed.Minimum = 1;
             this.trackBarWindowColorRed.Name = "trackBarWindowColorRed";
             this.trackBarWindowColorRed.Size = new System.Drawing.Size(106, 30);
             this.trackBarWindowColorRed.TabIndex = 2;
             this.trackBarWindowColorRed.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarWindowColorRed.Value = 1;
+            this.trackBarWindowColorRed.Value = 128;
+            this.trackBarWindowColorRed.Scroll += new System.EventHandler(this.updateColor);
             // 
             // Form1
             // 
@@ -350,13 +375,13 @@
             this.Controls.Add(this.groupBoxMoveDirection);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Phase2";
             this.groupBoxMoveDirection.ResumeLayout(false);
             this.groupBoxSetWindow.ResumeLayout(false);
             this.groupBoxSetWindow.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarMoveDistance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarWindowWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarWindowHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarWindowWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarMoveDistance)).EndInit();
             this.groupBoxSetColor.ResumeLayout(false);
             this.groupBoxSetColor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarWindowColorBlue)).EndInit();
