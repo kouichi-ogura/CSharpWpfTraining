@@ -90,18 +90,11 @@ namespace Phase2
 
         private void updateColor(object sender, EventArgs e)
         {
-            drawFillChildBackColor();
+            child.BackColor = Color.FromArgb(trackBarWindowColorRed.Value, trackBarWindowColorGreen.Value, trackBarWindowColorBlue.Value);
+
             labelWindowColorRedValue.Text = trackBarWindowColorRed.Value.ToString();
             labelWindowColorGreenValue.Text = trackBarWindowColorGreen.Value.ToString();
             labelWindowColorBlueValue.Text = trackBarWindowColorBlue.Value.ToString();
-        }
-
-        private void drawFillChildBackColor()
-        {
-            child.BackColor = Color.FromArgb(
-                trackBarWindowColorRed.Value,
-                trackBarWindowColorGreen.Value,
-                trackBarWindowColorBlue.Value);
         }
     }
 }
