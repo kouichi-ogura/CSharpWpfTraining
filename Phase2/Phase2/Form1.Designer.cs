@@ -190,6 +190,7 @@
             this.trackBarWindowHeight.TabIndex = 8;
             this.trackBarWindowHeight.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBarWindowHeight.Value = 200;
+            this.trackBarWindowHeight.Scroll += new System.EventHandler(this.updateRectSize);
             // 
             // labelWindowWidthValue
             // 

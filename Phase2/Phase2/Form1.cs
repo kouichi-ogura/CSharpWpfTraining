@@ -35,7 +35,7 @@ namespace Phase2
         private int getAddValue(int maxValue, int currentValue, int distanceValue, int offsetValue = 0)
         {
             int determiningValue = currentValue + distanceValue;
-            if ( determiningValue > maxValue - offsetValue)
+            if (determiningValue > maxValue - offsetValue)
             {
                 // 座標が画角を超える場合、画面端に張り付く
                 determiningValue = maxValue - offsetValue;
@@ -46,6 +46,7 @@ namespace Phase2
 
         private void updatePosition(object sender, EventArgs e)
         {
+            // TODO：switchで書きたい
             if (sender.Equals(this.buttonMoveDirectionUp))
             {
                 child.Top = getSubValue(child.Top, trackBarMoveDistance.Value);
