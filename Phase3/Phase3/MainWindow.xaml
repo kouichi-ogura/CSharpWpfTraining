@@ -15,7 +15,7 @@
                         Width="300">
                 <Label x:Name="ColorNameRed" Content="Color Red:" VerticalAlignment="Center" Margin="0,0,0,0" Width="80" />
                 <TextBox x:Name="ColorValueRed" Text="0" Margin="0,0,0,0" VerticalAlignment="Center" Width="50"/>
-                <Slider x:Name="ColorSliderRed" Margin="10, 0, 0, 0" VerticalAlignment="Center" Width="150" Background="Transparent"/>
+                <Slider x:Name="ColorSliderRed" Margin="10, 0, 0, 0" VerticalAlignment="Center" Width="150" Background="Transparent" Maximum="255"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
@@ -25,7 +25,7 @@
                         Width="300">
                 <Label x:Name="ColorNameGreen" Content="Color Green:" VerticalAlignment="Center" Margin="0,0,0,0" Width="80" />
                 <TextBox x:Name="ColorValueGreen" Text="0" Margin="0,0,0,0" VerticalAlignment="Center" Width="50"/>
-                <Slider x:Name="ColorSliderGreen" Margin="10, 0, 0, 0" VerticalAlignment="Center" Width="150" Background="Transparent"/>
+                <Slider x:Name="ColorSliderGreen" Margin="10, 0, 0, 0" VerticalAlignment="Center" Width="150" Background="Transparent" Maximum="255"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
@@ -35,7 +35,7 @@
                         Width="300">
                 <Label x:Name="ColorNameBlue" Content="Color Blue:" VerticalAlignment="Center" Margin="0,0,0,0" Width="80" />
                 <TextBox x:Name="ColorValueBlue" Text="0" Margin="0,0,0,0" VerticalAlignment="Center" Width="50"/>
-                <Slider x:Name="ColorSliderBlue" Margin="10, 0, 0, 0" VerticalAlignment="Center" Width="150" Background="Transparent"/>
+                <Slider x:Name="ColorSliderBlue" Margin="10, 0, 0, 0" VerticalAlignment="Center" Width="150" Background="Transparent" Maximum="255"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top" 
