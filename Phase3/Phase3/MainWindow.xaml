@@ -1,0 +1,50 @@
+﻿<Window x:Class="Phase3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Phase3"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="223.111" Width="352.444">
+    <Grid RenderTransformOrigin="0.492,0.479" Margin="0,0,18.667,8.667">
+        <StackPanel Orientation="Vertical" Margin="0,0,-16.667,-8.667">
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top" 
+                        HorizontalAlignment="Left"
+                        Margin="24,10,0,0"
+                        Width="300">
+                <Label x:Name="ColorNameRed" Content="Color Red:" VerticalAlignment="Center" Margin="0,0,0,0" Width="80" />
+                <TextBox x:Name="ColorValueRed" Text="0" Margin="0,0,0,0" VerticalAlignment="Center" Width="50"/>
+                <Slider x:Name="ColorSliderRed" Margin="10, 0, 0, 0" VerticalAlignment="Center" Width="150" Background="Transparent"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top" 
+                        HorizontalAlignment="Left"
+                        Margin="24,0,0,0"
+                        Width="300">
+                <Label x:Name="ColorNameGreen" Content="Color Green:" VerticalAlignment="Center" Margin="0,0,0,0" Width="80" />
+                <TextBox x:Name="ColorValueGreen" Text="0" Margin="0,0,0,0" VerticalAlignment="Center" Width="50"/>
+                <Slider x:Name="ColorSliderGreen" Margin="10, 0, 0, 0" VerticalAlignment="Center" Width="150" Background="Transparent"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top" 
+                        HorizontalAlignment="Left"
+                        Margin="24,0,0,0"
+                        Width="300">
+                <Label x:Name="ColorNameBlue" Content="Color Blue:" VerticalAlignment="Center" Margin="0,0,0,0" Width="80" />
+                <TextBox x:Name="ColorValueBlue" Text="0" Margin="0,0,0,0" VerticalAlignment="Center" Width="50"/>
+                <Slider x:Name="ColorSliderBlue" Margin="10, 0, 0, 0" VerticalAlignment="Center" Width="150" Background="Transparent"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top" 
+                        HorizontalAlignment="Stretch"
+                        Margin="26,20,18,0"
+                        Width="300">
+                <Rectangle Fill="#FF51FE6F" Height="60" Stroke="Black" VerticalAlignment="Top" Width="285"/>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>
