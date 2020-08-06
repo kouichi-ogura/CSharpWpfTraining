@@ -46,27 +46,26 @@ namespace Phase2
 
         private void updatePosition(object sender, EventArgs e)
         {
-            // TODO：switchで書きたい
-            if (sender.Equals(this.buttonMoveDirectionUp))
+            //if (sender.Equals(this.buttonMoveDirectionUp))
+            switch ((sender as Button).Name)
             {
+            case "buttonMoveDirectionUp":
                 child.Top = getSubValue(child.Top, trackBarMoveDistance.Value);
-            }
-            else if (sender.Equals(this.buttonMoveDirectionDown))
-            {
+                break;
+            case "buttonMoveDirectionDown":
                 child.Top = getAddValue(trackBarWindowHeight.Maximum, child.Top, trackBarMoveDistance.Value, child.Height);
-            }
-            else if (sender.Equals(this.buttonMoveDirectionLeft))
-            {
+                break;
+            case "buttonMoveDirectionLeft":
                 child.Left = getSubValue(child.Left, trackBarMoveDistance.Value);
-            }
-            else if (sender.Equals(this.buttonMoveDirectionRight))
-            {
+                break;
+            case "buttonMoveDirectionRight":
                 child.Left = getAddValue(trackBarWindowWidth.Maximum, child.Left, trackBarMoveDistance.Value, child.Width);
-            }
-            else // buttonMoveDirectionCentor
-            {
+                break;
+            default:
+                // buttonMoveDirectionCentor
                 child.Left = (trackBarWindowWidth.Maximum + child.Width) / 2;
                 child.Top = (trackBarWindowHeight.Maximum + child.Height) / 2;
+                break;
             }
         }
 
