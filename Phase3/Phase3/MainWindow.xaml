@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Phase3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="223.111" Width="352.444">
+        Title="Phase3" Height="223" Width="353">
 
     <Window.Resources>
         <Style x:Key="LabelTemplate" TargetType="Label">
@@ -33,10 +33,11 @@
             <Setter Property="TickPlacement" Value="TopLeft"/>
             <Setter Property="TickFrequency" Value="20"/>
         </Style>
+
+        <local:ColorConverter x:Key="ColorConvert" />
     </Window.Resources>
 
     <Grid RenderTransformOrigin="0.492,0.479" Margin="0,0,18.667,8.667">
-
         <StackPanel Orientation="Vertical" Margin="0,0,-16.667,-8.667">
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top" 
@@ -45,7 +46,8 @@
                         Width="300">
 
                 <Label x:Name="ColorNameRed" Content="Color Red:"  Style="{StaticResource LabelTemplate}"/>
-                <TextBox Name="ColorValueRed" Style="{StaticResource TextBoxTemplate}" Text="{Binding ElementName=ColorSliderRed, Path=Value}"/>
+                <TextBox Name="ColorValueRed" Style="{StaticResource TextBoxTemplate}"
+                         Text="{Binding ElementName=ColorSliderRed, Path=Value}"/>
                 <Slider Name="ColorSliderRed" Style="{StaticResource SliderTemplate}" />
             </StackPanel>
 
@@ -56,7 +58,8 @@
                         Width="300">
 
                 <Label x:Name="ColorNameGreen" Content="Color Green:"  Style="{StaticResource LabelTemplate}"/>
-                <TextBox Name="ColorValueGreen" Style="{StaticResource TextBoxTemplate}" Text="{Binding ElementName=ColorSliderGreen, Path=Value}"/>
+                <TextBox Name="ColorValueGreen" Style="{StaticResource TextBoxTemplate}"
+                         Text="{Binding ElementName=ColorSliderGreen, Path=Value}"/>
                 <Slider Name="ColorSliderGreen" Style="{StaticResource SliderTemplate}" />
             </StackPanel>
 
@@ -67,7 +70,8 @@
                         Width="300">
 
                 <Label x:Name="ColorNameBlue" Content="Color Blue:"  Style="{StaticResource LabelTemplate}"/>
-                <TextBox Name="ColorValueBlue" Style="{StaticResource TextBoxTemplate}" Text="{Binding ElementName=ColorSliderBlue, Path=Value}"/>
+                <TextBox Name="ColorValueBlue" Style="{StaticResource TextBoxTemplate}"
+                         Text="{Binding ElementName=ColorSliderBlue, Path=Value}"/>
                 <Slider Name="ColorSliderBlue" Style="{StaticResource SliderTemplate}" />
             </StackPanel>
 
@@ -77,27 +81,22 @@
                         Margin="26,20,18,0"
                         Width="300">
 
-                <Rectangle x:Name="Color"
-                           Fill="#FF51FE6F"
-                           Height="60"
-                           Stroke="Black"
-                           VerticalAlignment="Top"
-                           Width="285"/>
-                <!--<Rectangle.Fill>
-                    <SolidColorBrush>
-                        <SolidColorBrush.Color>
-                            <MultiBinding Converter="{StaticResource colorConverter}">
-                                <MultiBinding.Bindings>
-                                    <Binding ElementName="sliderR" Path="Value" />
-                                    <Binding ElementName="sliderG" Path="Value" />
-                                    <Binding ElementName="sliderB" Path="Value" />
-                                </MultiBinding.Bindings>
-                            </MultiBinding>
-                        </SolidColorBrush.Color>
-                    </SolidColorBrush>
-                </Rectangle.Fill>-->
+                <Rectangle Width="285" Height="60" HorizontalAlignment="Center" Stroke="Black">
+                    <Rectangle.Fill>
+                        <SolidColorBrush>
+                            <SolidColorBrush.Color>
+                                <MultiBinding Converter="{StaticResource ColorConvert}">
+                                    <MultiBinding.Bindings>
+                                        <Binding ElementName="ColorSliderRed" Path="Value" />
+                                        <Binding ElementName="ColorSliderGreen" Path="Value" />
+                                        <Binding ElementName="ColorSliderBlue" Path="Value" />
+                                    </MultiBinding.Bindings>
+                                </MultiBinding>
+                            </SolidColorBrush.Color>
+                        </SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
             </StackPanel>
         </StackPanel>
-
     </Grid>
 </Window>
