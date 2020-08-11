@@ -8,20 +8,28 @@
         Title="Phase3" Height="223" Width="353">
 
     <Window.Resources>
-        <Style x:Key="LabelTemplate" TargetType="Label">
+        <Style TargetType="StackPanel" x:Key="StackPanelHorizontalTemplate">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="24,5,0,0"/>
+            <Setter Property="Width" Value="300"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="LabelTemplate">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="Width" Value="80"/>
         </Style>
 
-        <Style x:Key="TextBoxTemplate" TargetType="TextBox">
+        <Style TargetType="TextBox" x:Key="TextBoxTemplate">
             <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Width" Value="50"/>
             <Setter Property="HorizontalContentAlignment" Value="Right"/>
         </Style>
 
-        <Style x:Key="SliderTemplate" TargetType="Slider">
+        <Style TargetType="Slider" x:Key="SliderTemplate">
             <Setter Property="Margin" Value="10, 0, 0, 0" />
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Width" Value="150"/>
@@ -34,53 +42,34 @@
             <Setter Property="TickFrequency" Value="20"/>
         </Style>
 
+        <!--ColorConverter はPhase3のpublicクラス-->
         <local:ColorConverter x:Key="ColorConvert" />
     </Window.Resources>
 
-    <Grid RenderTransformOrigin="0.492,0.479" Margin="0,0,18.667,8.667">
-        <StackPanel Orientation="Vertical" Margin="0,0,-16.667,-8.667">
-            <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Top" 
-                        HorizontalAlignment="Left"
-                        Margin="24,10,0,0"
-                        Width="300">
-
+    <Grid RenderTransformOrigin="0,0" Margin="0,0,18,8">
+        <StackPanel Orientation="Vertical" Margin="0,0,-16,-8">
+            <StackPanel Style="{StaticResource StackPanelHorizontalTemplate}">
                 <Label x:Name="ColorNameRed" Content="Color Red:"  Style="{StaticResource LabelTemplate}"/>
                 <TextBox Name="ColorValueRed" Style="{StaticResource TextBoxTemplate}"
                          Text="{Binding ElementName=ColorSliderRed, Path=Value}"/>
                 <Slider Name="ColorSliderRed" Style="{StaticResource SliderTemplate}" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Left"
-                        Margin="24,0,0,0"
-                        Width="300">
-
+            <StackPanel Style="{StaticResource StackPanelHorizontalTemplate}">
                 <Label x:Name="ColorNameGreen" Content="Color Green:"  Style="{StaticResource LabelTemplate}"/>
                 <TextBox Name="ColorValueGreen" Style="{StaticResource TextBoxTemplate}"
                          Text="{Binding ElementName=ColorSliderGreen, Path=Value}"/>
                 <Slider Name="ColorSliderGreen" Style="{StaticResource SliderTemplate}" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Left"
-                        Margin="24,0,0,0"
-                        Width="300">
-
+            <StackPanel Style="{StaticResource StackPanelHorizontalTemplate}">
                 <Label x:Name="ColorNameBlue" Content="Color Blue:"  Style="{StaticResource LabelTemplate}"/>
                 <TextBox Name="ColorValueBlue" Style="{StaticResource TextBoxTemplate}"
                          Text="{Binding ElementName=ColorSliderBlue, Path=Value}"/>
                 <Slider Name="ColorSliderBlue" Style="{StaticResource SliderTemplate}" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Stretch"
-                        Margin="26,20,18,0"
-                        Width="300">
-
+            <StackPanel Style="{StaticResource StackPanelHorizontalTemplate}" Margin="30,20,0,0">
                 <Rectangle Width="285" Height="60" HorizontalAlignment="Center" Stroke="Black">
                     <Rectangle.Fill>
                         <SolidColorBrush>
