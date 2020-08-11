@@ -6,43 +6,96 @@
         xmlns:local="clr-namespace:Phase3"
         mc:Ignorable="d"
         Title="MainWindow" Height="223.111" Width="352.444">
+
+    <Window.Resources>
+        <Style x:Key="LabelTemplate" TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Width" Value="80"/>
+        </Style>
+
+        <Style x:Key="TextBoxTemplate" TargetType="TextBox">
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        </Style>
+
+        <Style x:Key="SliderTemplate" TargetType="Slider">
+            <Setter Property="Margin" Value="10, 0, 0, 0" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Maximum" Value="255"/>
+            <Setter Property="SmallChange" Value="1"/>
+            <Setter Property="LargeChange" Value="5"/>
+            <Setter Property="IsSnapToTickEnabled" Value="True"/>
+            <Setter Property="TickPlacement" Value="TopLeft"/>
+            <Setter Property="TickFrequency" Value="20"/>
+        </Style>
+    </Window.Resources>
+
     <Grid RenderTransformOrigin="0.492,0.479" Margin="0,0,18.667,8.667">
+
         <StackPanel Orientation="Vertical" Margin="0,0,-16.667,-8.667">
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Top" 
                         HorizontalAlignment="Left"
                         Margin="24,10,0,0"
                         Width="300">
-                <Label x:Name="ColorNameRed" Content="Color Red:" VerticalAlignment="Center" Margin="0,0,0,0" Width="80" />
-                <TextBox x:Name="ColorValueRed" Text="0" Margin="0,0,0,0" VerticalAlignment="Center" Width="50"/>
-                <Slider x:Name="ColorSliderRed" Margin="10, 0, 0, 0" VerticalAlignment="Center" Width="150" Background="Transparent" Maximum="255"/>
+
+                <Label x:Name="ColorNameRed" Content="Color Red:"  Style="{StaticResource LabelTemplate}"/>
+                <TextBox Name="ColorValueRed" Style="{StaticResource TextBoxTemplate}" Text="{Binding ElementName=ColorSliderRed, Path=Value}"/>
+                <Slider Name="ColorSliderRed" Style="{StaticResource SliderTemplate}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Top" 
+                        VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                         Margin="24,0,0,0"
                         Width="300">
-                <Label x:Name="ColorNameGreen" Content="Color Green:" VerticalAlignment="Center" Margin="0,0,0,0" Width="80" />
-                <TextBox x:Name="ColorValueGreen" Text="0" Margin="0,0,0,0" VerticalAlignment="Center" Width="50"/>
-                <Slider x:Name="ColorSliderGreen" Margin="10, 0, 0, 0" VerticalAlignment="Center" Width="150" Background="Transparent" Maximum="255"/>
+
+                <Label x:Name="ColorNameGreen" Content="Color Green:"  Style="{StaticResource LabelTemplate}"/>
+                <TextBox Name="ColorValueGreen" Style="{StaticResource TextBoxTemplate}" Text="{Binding ElementName=ColorSliderGreen, Path=Value}"/>
+                <Slider Name="ColorSliderGreen" Style="{StaticResource SliderTemplate}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Top" 
+                        VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                         Margin="24,0,0,0"
                         Width="300">
-                <Label x:Name="ColorNameBlue" Content="Color Blue:" VerticalAlignment="Center" Margin="0,0,0,0" Width="80" />
-                <TextBox x:Name="ColorValueBlue" Text="0" Margin="0,0,0,0" VerticalAlignment="Center" Width="50"/>
-                <Slider x:Name="ColorSliderBlue" Margin="10, 0, 0, 0" VerticalAlignment="Center" Width="150" Background="Transparent" Maximum="255"/>
+
+                <Label x:Name="ColorNameBlue" Content="Color Blue:"  Style="{StaticResource LabelTemplate}"/>
+                <TextBox Name="ColorValueBlue" Style="{StaticResource TextBoxTemplate}" Text="{Binding ElementName=ColorSliderBlue, Path=Value}"/>
+                <Slider Name="ColorSliderBlue" Style="{StaticResource SliderTemplate}" />
             </StackPanel>
+
             <StackPanel Orientation="Horizontal"
-                        VerticalAlignment="Top" 
+                        VerticalAlignment="Top"
                         HorizontalAlignment="Stretch"
                         Margin="26,20,18,0"
                         Width="300">
-                <Rectangle Fill="#FF51FE6F" Height="60" Stroke="Black" VerticalAlignment="Top" Width="285"/>
+
+                <Rectangle x:Name="Color"
+                           Fill="#FF51FE6F"
+                           Height="60"
+                           Stroke="Black"
+                           VerticalAlignment="Top"
+                           Width="285"/>
+                <!--<Rectangle.Fill>
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <MultiBinding Converter="{StaticResource colorConverter}">
+                                <MultiBinding.Bindings>
+                                    <Binding ElementName="sliderR" Path="Value" />
+                                    <Binding ElementName="sliderG" Path="Value" />
+                                    <Binding ElementName="sliderB" Path="Value" />
+                                </MultiBinding.Bindings>
+                            </MultiBinding>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Rectangle.Fill>-->
             </StackPanel>
         </StackPanel>
 
