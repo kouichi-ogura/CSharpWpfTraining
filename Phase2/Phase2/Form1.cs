@@ -63,8 +63,8 @@ namespace Phase2
                 break;
             default:
                 // buttonMoveDirectionCentor
-                child.Left = (trackBarWindowWidth.Maximum + child.Width) / 2;
-                child.Top = (trackBarWindowHeight.Maximum + child.Height) / 2;
+                child.Left = (trackBarWindowWidth.Maximum - child.Width) / 2;
+                child.Top = (trackBarWindowHeight.Maximum - child.Height) / 2;
                 break;
             }
         }
