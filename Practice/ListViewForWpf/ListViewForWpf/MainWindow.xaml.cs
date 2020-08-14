@@ -23,33 +23,34 @@ namespace ListViewForWpf
         public MainWindow()
         {
             InitializeComponent();
-            ExaminationList el =new ExaminationList();
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            ExaminationList el = new ExaminationList();
             listView1.DataContext = el.ExaminationResult;
         }
-    }
 
-    public class Examination
-    {
-        public String Subject { get; set; }
-        public Int32 Point { get; set; }
-        public String UserName { get; set; }
-        public String ClassName { get; set; }
-    }
-
-    public class ExaminationList
-    {
-        // バインディングの指定先プロパティ
-        public ObservableCollection<Examination> ExaminationResult { get; set; }
-
-        // コンストラクタ(データ入力)
-        public ExaminationList()
+        private void button2_Click(object sender, RoutedEventArgs e)
         {
-            ExaminationResult = new ObservableCollection<Examination> {
-                new Examination { Subject="Mathematics", Point=90, UserName="Jeams", ClassName="A" },
-                new Examination { Subject="National language", Point=50, UserName="Melinda", ClassName="B" },
-                new Examination { Subject="Society", Point=70, UserName="Adam", ClassName="B" },
-                new Examination { Subject="Mathematics", Point=80, UserName="Jemmy", ClassName="C" }
-            };
+            List<Examination> el = new List<Examination>();
+
+            el.Add(new Examination { Subject = "National language", Point = 10, UserName = "Mary", ClassName = "D" });
+            el.Add(new Examination { Subject = "Society", Point = 30, UserName = "Bob", ClassName = "D" });
+            el.Add(new Examination { Subject = "Society", Point = 40, UserName = "John", ClassName = "D" });
+
+            listView2.ItemsSource = el;
+        }
+
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            List<Examination> el = new List<Examination>();
+
+            el.Add(new Examination { Subject = "Society", Point = 100, UserName = "Samantha", ClassName = "S" });
+            el.Add(new Examination { Subject = "Mathematics", Point = 100, UserName = "Zelda", ClassName = "S" });
+            el.Add(new Examination { Subject = "National language", Point = 100, UserName = "Nataly", ClassName = "S" });
+
+            listView3.ItemsSource = el;
         }
     }
 }

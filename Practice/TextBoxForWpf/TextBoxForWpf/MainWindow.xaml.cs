@@ -34,6 +34,8 @@ namespace TextBoxForWpf
             textBox2.DataContext = ts2;
 
             textBox3.DataContext = new TextString3();
+
+            textBox4.Text = "バインドせずに設定";
         }
     }
 
