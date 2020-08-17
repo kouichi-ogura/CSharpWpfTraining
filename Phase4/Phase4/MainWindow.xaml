@@ -1,0 +1,90 @@
+﻿<Window x:Class="Phase4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Phase4"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="520" Width="680">
+
+    <Window.Resources>
+        <Style TargetType="StackPanel" x:Key="StackPanelInGroupBoxTemplate">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
+
+        <Style TargetType="GroupBox" x:Key="GroupBoxTemplate">
+            <Setter Property="Height" Value="64"/>
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Margin" Value="2,0,0,0"/>
+        </Style>
+
+        <Style TargetType="Button" x:Key="ButtonTemplate">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="LabelTemplate">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="0,-5,0,0"/>
+        </Style>
+
+        <Style TargetType="TextBox" x:Key="TextBoxTemplate">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+        </Style>
+
+        <Style TargetType="Slider" x:Key="SliderTemplate">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="IsSnapToTickEnabled" Value="True"/>
+            <Setter Property="Width" Value="60"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation=" Horizontal">
+                <GroupBox Header="操作" Style="{StaticResource GroupBoxTemplate}" Width="50">
+                    <Button Content="開く" Style="{StaticResource ButtonTemplate}" Width="30"/>
+                </GroupBox>
+                <GroupBox Header="サムネイルのサイズ" Style="{StaticResource GroupBoxTemplate}" >
+                    <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
+                        <Label Content="Small" Style="{StaticResource LabelTemplate}"  />
+                        <Slider Name="SliderThumbnail" Style="{StaticResource SliderTemplate}"
+                                Minimum="1" Maximum="3" TickFrequency="1" SmallChange="1" LargeChange="1"
+                                TickPlacement="BottomRight"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="拡大/縮小" Style="{StaticResource GroupBoxTemplate}" >
+                    <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
+                        <Label Content="1.0倍:" Style="{StaticResource LabelTemplate}"  />
+                        <Slider Name="SliderScall" Style="{StaticResource SliderTemplate}"
+                                Minimum="0.1" Maximum="5.0" TickFrequency="0.1" SmallChange="0.1" LargeChange="1.0"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="回転" Style="{StaticResource GroupBoxTemplate}" >
+                    <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
+                        <Label Content="000度:" Style="{StaticResource LabelTemplate}"  />
+                        <Slider Name="SlxiderScall" Style="{StaticResource SliderTemplate}"
+                                Minimum="0" Maximum="360" TickFrequency="1" SmallChange="1" LargeChange="90"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="ファイル名" Style="{StaticResource GroupBoxTemplate}" Width="240">
+                    <TextBox Height="20" />
+                </GroupBox>
+            </StackPanel>
+            <ListView Height="100">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Image />
+        </StackPanel>
+    </Grid>
+</Window>
