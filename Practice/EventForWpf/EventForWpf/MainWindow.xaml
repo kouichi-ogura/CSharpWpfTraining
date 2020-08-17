@@ -4,10 +4,22 @@
         Title="MainWindow" Height="350" Width="525">
 
     <Grid>
-        <Button x:Name="AButton"
-                    Content="ClickME"
-                    Height="100"
-                    FontSize="40"
-                    Click="Button_Click"/>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="AButton"
+                        Content="ClickME"
+                        Height="100"
+                        FontSize="40"
+                        Click="Button_Click"/>
+            <Button x:Name="Button"
+                        Content="ClickYOU"
+                        Height="100"
+                        FontSize="40"
+                        Click="Button_Click"/>
+            <Button x:Name="Cutton"
+                        Content="ClickHE"
+                        Height="100"
+                        FontSize="40"
+                        Click="Button_Click"/>
+        </StackPanel>
     </Grid>
 </Window>
