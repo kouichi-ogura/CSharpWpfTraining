@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Phase4.Properties {
+namespace SaveRestoreForWpf.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "10.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,43 +25,40 @@ namespace Phase4.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ファイルパスを入力してください")]
-        public string TextFileName {
+        [global::System.Configuration.DefaultSettingValueAttribute("アプリで設定する初期値")]
+        public string textBoxPath {
             get {
-                return ((string)(this["TextFileName"]));
+                return ((string)(this["textBoxPath"]));
             }
             set {
-                this["TextFileName"] = value;
+                this["textBoxPath"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("700")]
-        public double ScreenWidth {
+        [global::System.Configuration.DefaultSettingValueAttribute("スコープユーザーは、Read/Write可能")]
+        public string SampleUser {
             get {
-                return ((double)(this["ScreenWidth"]));
+                return ((string)(this["SampleUser"]));
             }
             set {
-                this["ScreenWidth"] = value;
+                this["SampleUser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("スコープアプリケーションは、Readのみ可能")]
+        public string SettingApp {
+            get {
+                return ((string)(this["SettingApp"]));
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500")]
-        public double ScreenHeight {
-            get {
-                return ((double)(this["ScreenHeight"]));
-            }
-            set {
-                this["ScreenHeight"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public double ScreenLeft {
             get {
                 return ((double)(this["ScreenLeft"]));
@@ -73,13 +70,37 @@ namespace Phase4.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public double ScreenTop {
             get {
                 return ((double)(this["ScreenTop"]));
             }
             set {
                 this["ScreenTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double ScreenWidth {
+            get {
+                return ((double)(this["ScreenWidth"]));
+            }
+            set {
+                this["ScreenWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double ScreenHeight {
+            get {
+                return ((double)(this["ScreenHeight"]));
+            }
+            set {
+                this["ScreenHeight"] = value;
             }
         }
     }

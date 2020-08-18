@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Phase4"
         mc:Ignorable="d"
-        Title="MainWindow" Height="520" Width="680">
+        Title="MainWindow" Height="520" Width="680"
+        Closing="WindowClosing">
 
     <Window.Resources>
         <Style TargetType="StackPanel" x:Key="StackPanelInGroupBoxTemplate">
@@ -49,7 +50,7 @@
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation=" Horizontal">
                 <GroupBox Header="操作" Style="{StaticResource GroupBoxTemplate}" Width="50">
-                    <Button Content="開く" Style="{StaticResource ButtonTemplate}" Width="30"/>
+                    <Button Name="ButtonOpenDialog" Content="開く" Style="{StaticResource ButtonTemplate}" Width="30" HorizontalAlignment="Right" Margin="0,10,4,0" Click="ButtonOpenDialog_Click"/>
                 </GroupBox>
                 <GroupBox Header="サムネイルのサイズ" Style="{StaticResource GroupBoxTemplate}" >
                     <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
@@ -69,12 +70,12 @@
                 <GroupBox Header="回転" Style="{StaticResource GroupBoxTemplate}" >
                     <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
                         <Label Content="000度:" Style="{StaticResource LabelTemplate}"  />
-                        <Slider Name="SlxiderScall" Style="{StaticResource SliderTemplate}"
+                        <Slider Name="SliderAngle" Style="{StaticResource SliderTemplate}"
                                 Minimum="0" Maximum="360" TickFrequency="1" SmallChange="1" LargeChange="90"/>
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="ファイル名" Style="{StaticResource GroupBoxTemplate}" Width="240">
-                    <TextBox Height="20" />
+                    <TextBox Name="TextFileName" Height="20" />
                 </GroupBox>
             </StackPanel>
             <ListView Height="100">
@@ -84,7 +85,10 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Image />
+            <Border>
+                <Image Name="ImageView" Source="{Binding ElementName=TextFileName, Path=Text}"/>
+
+            </Border>
         </StackPanel>
     </Grid>
 </Window>
