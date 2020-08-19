@@ -33,10 +33,14 @@
             <Setter Property="Margin" Value="0,-5,0,0"/>
         </Style>
 
+        <Style TargetType="TextBlock" x:Key="TextBlockTemplate">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="0,0,5,0"/>
+        </Style>
+
         <Style TargetType="TextBox" x:Key="TextBoxTemplate">
             <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="30"/>
-            <Setter Property="Margin" Value="0,0,0,0"/>
         </Style>
 
         <Style TargetType="Slider" x:Key="SliderTemplate">
@@ -46,49 +50,56 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation=" Horizontal">
-                <GroupBox Header="操作" Style="{StaticResource GroupBoxTemplate}" Width="50">
-                    <Button Name="ButtonOpenDialog" Content="開く" Style="{StaticResource ButtonTemplate}" Width="30" HorizontalAlignment="Right" Margin="0,10,4,0" Click="ButtonOpenDialog_Click"/>
-                </GroupBox>
-                <GroupBox Header="サムネイルのサイズ" Style="{StaticResource GroupBoxTemplate}" >
-                    <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
-                        <Label Content="Small" Style="{StaticResource LabelTemplate}"  />
-                        <Slider Name="SliderThumbnail" Style="{StaticResource SliderTemplate}"
-                                Minimum="1" Maximum="3" TickFrequency="1" SmallChange="1" LargeChange="1"
-                                TickPlacement="BottomRight"/>
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox Header="拡大/縮小" Style="{StaticResource GroupBoxTemplate}" >
-                    <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
-                        <Label Content="1.0倍:" Style="{StaticResource LabelTemplate}"  />
-                        <Slider Name="SliderScall" Style="{StaticResource SliderTemplate}"
-                                Minimum="0.1" Maximum="5.0" TickFrequency="0.1" SmallChange="0.1" LargeChange="1.0"/>
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox Header="回転" Style="{StaticResource GroupBoxTemplate}" >
-                    <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
-                        <Label Content="000度:" Style="{StaticResource LabelTemplate}"  />
-                        <Slider Name="SliderAngle" Style="{StaticResource SliderTemplate}"
-                                Minimum="0" Maximum="360" TickFrequency="1" SmallChange="1" LargeChange="90"/>
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox Header="ファイル名" Style="{StaticResource GroupBoxTemplate}" Width="240">
-                    <TextBox Name="TextFileName" Height="20" />
-                </GroupBox>
-            </StackPanel>
-            <ListView Height="100">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-            <Border>
-                <Image Name="ImageView" Source="{Binding ElementName=TextFileName, Path=Text}"/>
-
-            </Border>
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation=" Horizontal">
+            <GroupBox Header="操作" Style="{StaticResource GroupBoxTemplate}" Width="50">
+                <Button Name="ButtonOpenDialog" Content="開く" Style="{StaticResource ButtonTemplate}" Width="30" HorizontalAlignment="Right" Margin="0,10,4,0" Click="ButtonOpenDialog_Click"/>
+            </GroupBox>
+            <GroupBox Header="サムネイルのサイズ" Style="{StaticResource GroupBoxTemplate}" >
+                <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
+                    <Label Content="Small" Style="{StaticResource LabelTemplate}" />
+                    <Slider Name="SliderThumbnail" Style="{StaticResource SliderTemplate}"
+                            Minimum="1" Maximum="3" TickFrequency="1" SmallChange="1" LargeChange="1"
+                            TickPlacement="BottomRight"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="拡大/縮小" Style="{StaticResource GroupBoxTemplate}" >
+                <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
+                    <TextBlock Text="{Binding ElementName=SliderScall, Path=Value, StringFormat={}{0:0.0} 倍:}" Style="{StaticResource TextBlockTemplate}" />
+                    <Slider Name="SliderScall" Style="{StaticResource SliderTemplate}"
+                            Minimum="0.1" Maximum="5.0" TickFrequency="0.1" SmallChange="0.1" LargeChange="1.0"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="回転" Style="{StaticResource GroupBoxTemplate}" >
+                <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
+                    <!--Labelだと、StringFormatでうまく文字が表示できなかった
+                    <Label Content="{Binding ElementName=SliderAngle, Path=Value, StringFormat={0:0000}}" Style="{StaticResource LabelTemplate}" />-->
+                    <TextBlock Text="{Binding ElementName=SliderAngle, Path=Value, StringFormat={}{0:000} 度:}" Style="{StaticResource TextBlockTemplate}" />
+                    <Slider Name="SliderAngle" Style="{StaticResource SliderTemplate}"
+                            Minimum="0" Maximum="360" TickFrequency="1" SmallChange="1" LargeChange="90"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="ファイル名" Style="{StaticResource GroupBoxTemplate}" Width="240">
+                <TextBox Name="TextFileName" Height="20" />
+            </GroupBox>
         </StackPanel>
-    </Grid>
+        <ListView Height="100">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Border>
+            <Image Name="ImageView"
+                    Source="{Binding ElementName=TextFileName, Path=Text}">
+                <Image.RenderTransform>
+                    <RotateTransform  Angle="{Binding ElementName=SliderAngle, Path=Value}"/>
+                    <!--<RotateTransform RenderTransformOrigin="0.5,0.5"  Angle="{Binding ElementName=SliderAngle, Path=Value}"/>-->
+
+                    <!--<ScaleTransform ScaleX="{Binding ElementName=SliderAngle, Path=Value}" ScaleY="{Binding ElementName=SliderAngle, Path=Value}"/>-->
+                </Image.RenderTransform>
+            </Image>
+        </Border>
+    </StackPanel>
 </Window>
