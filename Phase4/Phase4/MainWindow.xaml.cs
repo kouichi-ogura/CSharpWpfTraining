@@ -14,7 +14,7 @@ namespace Phase4
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Dto> _dtos = new ObservableCollection<Dto>();
+        public ObservableCollection<Thumnail> _thumnail = new ObservableCollection<Thumnail>();
 
         //MyListBox.SelectionMode = SelectionMode.Single;
             private string ThumNailDirPath = "";
@@ -35,6 +35,8 @@ namespace Phase4
         {
             LoadSetting();
             ListBoxTumnail.SelectionMode = SelectionMode.Single;
+
+            DrawThumnail();
         }
 
         // xamlのClosingで定義したメソッド。
@@ -85,12 +87,14 @@ namespace Phase4
                 return;
             }
 
-            ListBoxTumnail.Items.Clear();
-            // TODO:テキストコントロールのファイルをお試しで表示
-            _dtos.Add(new Dto(this.ThumNailDirPath, this.ThumNailDirPath));
-            _dtos.Add(new Dto(this.ThumNailDirPath, this.ThumNailDirPath));
-            ListBoxTumnail.ItemsSource = _dtos;
 
+            ListBoxTumnail.Items.Clear();
+            string[] files = Directory.GetFiles(this.ThumNailDirPath);
+            foreach (string file in files)
+            {
+                _thumnail.Add(new Thumnail(file));
+            }
+            ListBoxTumnail.ItemsSource = _thumnail;
         }
 
         // サンプルアプリとはふるまい違うけど、こちらの方がパスを貼り付けできるので便利
@@ -129,16 +133,15 @@ namespace Phase4
     }
 
     // TODO：別ファイルへ引っ越し
-    public sealed class Dto
+    public sealed class Thumnail
     {
-        public Dto(string fileName ="", string name = "")
-        {
-            FileName = fileName;
-            Name = name;
-        }
-
+        public string FilePath { get; set; }
         public string FileName { get; set; }
-        public string Name { get; set; }
-    }
 
+        public Thumnail(string filepath)
+        {
+            this.FilePath = filepath;
+            this.FileName = Path.GetFileName(filepath);
+        }
+    }
 }
