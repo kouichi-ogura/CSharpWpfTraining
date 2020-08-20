@@ -103,12 +103,18 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
+                        <!--TODO:ListBoxを横に並べたい-->
+
+                        <!--TODO:お試しでテキストコントロールのファイルを表示-->
+
                         <Image Source="{Binding ElementName=TextFileName, Path=Text}" />
                         <TextBlock Text="{Binding ElementName=TextFileName, Path=Text}" />
+                        <!--TODO:対象フォルダからファイル取得
+                        <Image Source="{Binding ElementName=_dtos, Path=FilePath}" />
+                        <TextBlock Text="{Binding ElementName=_dtos, Path=FileName}" />-->
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-
         </ListBox>
         <!--<ListView Height="100" DockPanel.Dock="Top">
             <ListView.View>
