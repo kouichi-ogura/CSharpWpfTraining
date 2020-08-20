@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using Microsoft.Win32;
+using System.Windows;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
+//using System.Windows.Forms;
 
 namespace Phase4
 {
@@ -54,7 +58,47 @@ namespace Phase4
 
         private void ButtonOpenDialog_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Comming Soon..");
+            string DirName = "";
+            if (! GetDirectoryName(ref DirName) )
+            {
+                MessageBox.Show("フォルダが選択されていません");
+                return;
+            }
+            MessageBox.Show(DirName);
+        }
+
+        // サンプルアプリとはふるまい違うけど、こちらの方がパスを貼り付けできるので便利
+        private Boolean GetDirectoryName(ref string DirectoryName)
+        {
+            Boolean IsSuccess = false;
+            var dlg = new CommonOpenFileDialog("サムネイル表示対象のフォルダを選択")
+            {
+                IsFolderPicker = true
+            };
+
+            if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                DirectoryName = dlg.FileName;
+                IsSuccess = true;
+            }
+            return IsSuccess;
+        }
+
+        // 本アプリでは未使用。参考までに作成
+        private Boolean GetFileName(ref string FileName)
+        {
+            Boolean IsSuccess = false;
+            var dlg = new OpenFileDialog()
+            {
+                Filter = "テキストファイル (*.txt)|*.txt|全てのファイル (*.*)|*.*"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                FileName = dlg.FileName;
+                IsSuccess = true;
+            }
+            return IsSuccess;
         }
     }
 }
