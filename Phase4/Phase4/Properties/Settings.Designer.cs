@@ -82,5 +82,17 @@ namespace Phase4.Properties {
                 this["ScreenTop"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\tmp")]
+        public string ThumNailDirPath {
+            get {
+                return ((string)(this["ThumNailDirPath"]));
+            }
+            set {
+                this["ThumNailDirPath"] = value;
+            }
+        }
     }
 }

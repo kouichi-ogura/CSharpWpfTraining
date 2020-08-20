@@ -91,13 +91,32 @@
         </StackPanel>
 
         <!--TODO：サムネイルの表示TreeView ListBox ListView-->
-        <ListView Height="100" DockPanel.Dock="Top">
+        <!--small Height="70"-->
+        <!--large Height="130"-->
+        <ListBox x:Name="ListBoxTumnail"
+                 VerticalAlignment="Top"
+                 HorizontalAlignment="Left"
+                 VerticalContentAlignment="Stretch" 
+                 HorizontalContentAlignment="Stretch" 
+                 Height="100"
+                 DockPanel.Dock="Top">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding ElementName=TextFileName, Path=Text}" />
+                        <TextBlock Text="{Binding ElementName=TextFileName, Path=Text}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+        <!--<ListView Height="100" DockPanel.Dock="Top">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
-        </ListView>
+        </ListView>-->
 
         <!--<StackPanel Orientation="Vertical">を設定していると、スクロールバーが常にDisableになる-->
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">

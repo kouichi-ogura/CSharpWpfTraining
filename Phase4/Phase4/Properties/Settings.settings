@@ -17,5 +17,8 @@
     <Setting Name="ScreenTop" Type="System.Double" Scope="User">
       <Value Profile="(Default)">200</Value>
     </Setting>
+    <Setting Name="ThumNailDirPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\tmp</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
