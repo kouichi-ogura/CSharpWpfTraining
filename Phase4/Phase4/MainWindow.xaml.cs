@@ -10,7 +10,6 @@ namespace Phase4
         public MainWindow()
         {
             InitializeComponent();
-            LoadSetting();
         }
 
         ~MainWindow()
@@ -19,10 +18,17 @@ namespace Phase4
             //SaveSetting();
         }
 
-        private void ButtonOpenDialog_Click(object sender, RoutedEventArgs e)
+        // xamlのLoadedで定義したメソッド。
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            LoadSetting();
         }
 
+        // xamlのClosingで定義したメソッド。
+        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            SaveSetting();
+        }
         private void LoadSetting()
         {
             // 不要（？）
@@ -46,10 +52,9 @@ namespace Phase4
             Properties.Settings.Default.Save();
         }
 
-        // xamlのClosingで定義したメソッド。ウィンドウ閉じるときに呼ばれる
-        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ButtonOpenDialog_Click(object sender, RoutedEventArgs e)
         {
-            SaveSetting();
+            MessageBox.Show("Comming Soon..");
         }
     }
 }

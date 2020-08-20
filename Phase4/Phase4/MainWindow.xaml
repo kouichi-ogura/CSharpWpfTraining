@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Phase4"
         mc:Ignorable="d"
         Title="MainWindow" Height="520" Width="680"
+        Loaded="Window_Loaded"
         Closing="WindowClosing">
 
     <Window.Resources>
@@ -25,7 +26,7 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             <Setter Property="Width" Value="30"/>
-            <Setter Property="Margin" Value="0,10,4,0"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
         </Style>
 
         <Style TargetType="Label" x:Key="LabelTemplate">
@@ -50,60 +51,65 @@
         </Style>
     </Window.Resources>
 
-    <StackPanel Orientation="Vertical">
-        <StackPanel Orientation=" Horizontal">
-            <GroupBox Header="操作" Style="{StaticResource GroupBoxTemplate}" Width="50">
+    <DockPanel>
+        <!--Imageコントロールの画像が上に張り付く
+        <StackPanel Orientation="Vertical">-->
+        <StackPanel Orientation=" Horizontal" DockPanel.Dock="Top">
+            <GroupBox Header="操作" Style="{StaticResource GroupBoxTemplate}" Width="50" DockPanel.Dock="Left">
                 <Button Name="ButtonOpenDialog" Content="開く" Style="{StaticResource ButtonTemplate}" Click="ButtonOpenDialog_Click"/>
             </GroupBox>
-            <GroupBox Header="サムネイルのサイズ" Style="{StaticResource GroupBoxTemplate}" >
+            <GroupBox Header="サムネイルのサイズ" Style="{StaticResource GroupBoxTemplate}" DockPanel.Dock="Left" >
                 <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
                     <Label Content="Middle" Style="{StaticResource LabelTemplate}" />
                     <Slider Name="SliderThumbnail" Style="{StaticResource SliderTemplate}"
-                            Minimum="1" Maximum="3" TickFrequency="1" SmallChange="1" LargeChange="1" Value="2"
-                            TickPlacement="BottomRight"/>
+                        Minimum="1" Maximum="3" TickFrequency="1" SmallChange="1" LargeChange="1" Value="2"
+                        TickPlacement="BottomRight"/>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="拡大/縮小" Style="{StaticResource GroupBoxTemplate}" >
+            <!--TODO：マウスホイールで拡大/縮小したい-->
+            <GroupBox Header="拡大/縮小" Style="{StaticResource GroupBoxTemplate}" DockPanel.Dock="Left" >
                 <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
                     <TextBlock Text="{Binding ElementName=SliderScale, Path=Value, StringFormat={}{0:0.0} 倍:}" Style="{StaticResource TextBlockTemplate}" />
                     <Slider Name="SliderScale" Style="{StaticResource SliderTemplate}"
-                            Minimum="0.1" Maximum="5.0" TickFrequency="0.1" SmallChange="0.1" LargeChange="1.0" Value="1.0"/>
+                        Minimum="0.1" Maximum="5.0" TickFrequency="0.1" SmallChange="0.1" LargeChange="1.0" Value="1.0"/>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="回転" Style="{StaticResource GroupBoxTemplate}" >
+            <GroupBox Header="回転" Style="{StaticResource GroupBoxTemplate}" DockPanel.Dock="Left" >
                 <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
                     <!--Labelだと、StringFormatでうまく文字が表示できなかった
-                    <Label Content="{Binding ElementName=SliderAngle, Path=Value, StringFormat={0:0000}}" Style="{StaticResource LabelTemplate}" />-->
+                <Label Content="{Binding ElementName=SliderAngle, Path=Value, StringFormat={0:0000}}" Style="{StaticResource LabelTemplate}" />-->
                     <TextBlock Text="{Binding ElementName=SliderAngle, Path=Value, StringFormat={}{0:000} 度:}" Style="{StaticResource TextBlockTemplate}" />
                     <Slider Name="SliderAngle" Style="{StaticResource SliderTemplate}"
-                            Minimum="0" Maximum="360" TickFrequency="1" SmallChange="1" LargeChange="90" Value="0"/>
+                        Minimum="0" Maximum="360" TickFrequency="1" SmallChange="1" LargeChange="90" Value="0"/>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="ファイル名" Style="{StaticResource GroupBoxTemplate}" Width="240">
+
+            <!--TODO：ウィンドウ右端に吸着してくれない-->
+            <GroupBox Header="ファイル名" Style="{StaticResource GroupBoxTemplate}" Width="250" DockPanel.Dock="Right">
                 <TextBox Name="TextFileName" Height="20" />
             </GroupBox>
         </StackPanel>
-        <ListView Height="100">
+
+        <!--TODO：サムネイルの表示<TreeView/>-->
+        <ListView Height="100" DockPanel.Dock="Top">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Border>
-            <ScrollViewer>
-                <!--「Stretch="None"」にしないとScalingが効かない-->
-                <Image Name="ImageView" Stretch="None" Source="{Binding ElementName=TextFileName, Path=Text}">
-                    <Image.LayoutTransform>
-                        <TransformGroup>
-                            <RotateTransform  Angle="{Binding ElementName=SliderAngle, Path=Value}"/>
-                            <!--<ScaleTransform ScaleX="2" ScaleY="5" />-->
-                            <!--<ScaleTransform ScaleX="{Binding ElementName=SliderScale, Path=Value}" ScaleY="{Binding ElementName=SliderScale, Path=Value}"/>-->
-                            <ScaleTransform ScaleX="{Binding ElementName=SliderScale, Path=Value}" ScaleY="{Binding ElementName=SliderScale, Path=Value}"/>
-                        </TransformGroup>
-                    </Image.LayoutTransform>
-                </Image>
-            </ScrollViewer>
-        </Border>
-    </StackPanel>
+
+        <!--<StackPanel Orientation="Vertical">を設定していると、スクロールバーが常にDisableになる-->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <!--「Stretch="None"」にしないとScalingが効かない-->
+            <Image Name="ImageView" Stretch="None" Source="{Binding ElementName=TextFileName, Path=Text}" >
+                <Image.LayoutTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="{Binding ElementName=SliderAngle, Path=Value}"/>
+                        <ScaleTransform ScaleX="{Binding ElementName=SliderScale, Path=Value}" ScaleY="{Binding ElementName=SliderScale, Path=Value}"/>
+                    </TransformGroup>
+                </Image.LayoutTransform>
+            </Image>
+        </ScrollViewer>
+    </DockPanel>
 </Window>
