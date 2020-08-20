@@ -90,7 +90,7 @@
             </GroupBox>
         </StackPanel>
 
-        <!--TODO：サムネイルの表示<TreeView/>-->
+        <!--TODO：サムネイルの表示TreeView ListBox ListView-->
         <ListView Height="100" DockPanel.Dock="Top">
             <ListView.View>
                 <GridView>
