@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 //using System.Windows.Automation.Peers;
 //using System.Windows.Forms;
 
@@ -16,10 +17,7 @@ namespace Phase4
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Thumnail> m_thumnail = new ObservableCollection<Thumnail>();
-
         //MyListBox.SelectionMode = SelectionMode.Single;
-        private string m_ThumNailDirPath = "";
         private string[] m_TargetExts = { ".jpg", ".bmp", ".png", ".tiff", ".gif" };
 
         public MainWindow()
@@ -56,7 +54,7 @@ namespace Phase4
             this.Top = Properties.Settings.Default.ScreenTop;
             this.Width = Properties.Settings.Default.ScreenWidth;
             this.Height = Properties.Settings.Default.ScreenHeight;
-            this.m_ThumNailDirPath = Properties.Settings.Default.m_ThumNailDirPath;
+            TextDirName.Text = Properties.Settings.Default.m_ThumNailDirPath;
             TextFileName.Text = Properties.Settings.Default.TextFileName;
         }
 
@@ -66,7 +64,7 @@ namespace Phase4
             Properties.Settings.Default.ScreenTop = this.Top;
             Properties.Settings.Default.ScreenWidth = this.Width;
             Properties.Settings.Default.ScreenHeight = this.Height;
-            Properties.Settings.Default.m_ThumNailDirPath = this.m_ThumNailDirPath;
+            Properties.Settings.Default.m_ThumNailDirPath = TextDirName.Text;
             Properties.Settings.Default.TextFileName = TextFileName.Text;
 
             Properties.Settings.Default.Save();
@@ -88,20 +86,27 @@ namespace Phase4
             string[] files = null;
             if (!GetFileList(ref files))
             {
-                MessageBox.Show("サムネイルを表示するフォルダが存在しないか、画像ファイルがありません。" + Environment.NewLine + this.m_ThumNailDirPath);
+                MessageBox.Show("サムネイルを表示するフォルダが存在しないか、画像ファイルがありません。" + Environment.NewLine + this.TextDirName);
                 return;
             }
 
-            if (ListBoxTumnail.Items.Count != 0)
-            {
-                ListBoxTumnail.Items.Clear();
-            }
+            // クラスをローカル変数にしたので、クリア削除は不要
+            //if (ListBoxTumnail.Items.Count != 0)
+            //{
+            //    Exception
+            //    ListBoxTumnail.Items.Clear();
 
+            //    Never displayed
+            //    ListBoxTumnail.ClearValue(ListBox.ItemsSourceProperty);
+            //}
+
+            var thumnail = new List<Thumnail>();
             foreach (string file in files)
             {
-                m_thumnail.Add(new Thumnail(file));
+                thumnail.Add(new Thumnail(file));
             }
-            ListBoxTumnail.ItemsSource = m_thumnail;
+
+            DataContext = thumnail;
         }
 
         // サンプルアプリとはふるまい違うけど、こちらの方がパスを貼り付けできるので便利
@@ -115,7 +120,24 @@ namespace Phase4
 
             if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                this.m_ThumNailDirPath = dlg.FileName;
+                TextDirName.Text = dlg.FileName;
+                IsSuccess = true;
+            }
+            return IsSuccess;
+        }
+
+        // サンプルアプリと同じふるまい
+        private Boolean GetDirectoryNameForForm()
+        {
+            Boolean IsSuccess = false;
+            var dlg = new System.Windows.Forms.FolderBrowserDialog()
+            {
+                Description = "サムネイル表示対象のフォルダ選択"
+            };
+
+            if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                TextDirName.Text = dlg.SelectedPath;
                 IsSuccess = true;
             }
             return IsSuccess;
@@ -141,9 +163,9 @@ namespace Phase4
         private Boolean GetFileList(ref string[] files)
         {
             Boolean IsSuccess = false;
-            if (Directory.Exists(this.m_ThumNailDirPath))
+            if (Directory.Exists(TextDirName.Text))
             {
-                string[] AllFile = Directory.GetFiles(this.m_ThumNailDirPath);
+                string[] AllFile = Directory.GetFiles(TextDirName.Text);
                 files = AllFile.Where(file => m_TargetExts.Any(pattern => file.ToLower().EndsWith(pattern))).ToArray();
 
                 if (files.Length > 0)
