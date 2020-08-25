@@ -5,6 +5,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
+//using System.Windows.Automation.Peers;
 //using System.Windows.Forms;
 
 namespace Phase4
@@ -14,10 +16,11 @@ namespace Phase4
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Thumnail> _thumnail = new ObservableCollection<Thumnail>();
+        public ObservableCollection<Thumnail> m_thumnail = new ObservableCollection<Thumnail>();
 
         //MyListBox.SelectionMode = SelectionMode.Single;
-            private string ThumNailDirPath = "";
+        private string m_ThumNailDirPath = "";
+        private string[] m_TargetExts = { ".jpg", ".bmp", ".png", ".tiff", ".gif" };
 
         public MainWindow()
         {
@@ -53,17 +56,17 @@ namespace Phase4
             this.Top = Properties.Settings.Default.ScreenTop;
             this.Width = Properties.Settings.Default.ScreenWidth;
             this.Height = Properties.Settings.Default.ScreenHeight;
-            this.ThumNailDirPath = Properties.Settings.Default.ThumNailDirPath;
+            this.m_ThumNailDirPath = Properties.Settings.Default.m_ThumNailDirPath;
             TextFileName.Text = Properties.Settings.Default.TextFileName;
         }
 
         private void SaveSetting()
         {
-            Properties.Settings.Default.ScreenLeft   = this.Left;
-            Properties.Settings.Default.ScreenTop    = this.Top;
-            Properties.Settings.Default.ScreenWidth  = this.Width;
+            Properties.Settings.Default.ScreenLeft = this.Left;
+            Properties.Settings.Default.ScreenTop = this.Top;
+            Properties.Settings.Default.ScreenWidth = this.Width;
             Properties.Settings.Default.ScreenHeight = this.Height;
-            Properties.Settings.Default.ThumNailDirPath = this.ThumNailDirPath;
+            Properties.Settings.Default.m_ThumNailDirPath = this.m_ThumNailDirPath;
             Properties.Settings.Default.TextFileName = TextFileName.Text;
 
             Properties.Settings.Default.Save();
@@ -71,30 +74,34 @@ namespace Phase4
 
         private void ButtonOpenDialog_Click(object sender, RoutedEventArgs e)
         {
-            if (! GetDirectoryName() )
+            if (!GetDirectoryName())
             {
                 MessageBox.Show("フォルダが選択されていません");
                 return;
             }
+
             DrawThumnail();
         }
 
         private void DrawThumnail()
         {
-            if ( ! Directory.Exists(this.ThumNailDirPath) )
+            string[] files = null;
+            if (!GetFileList(ref files))
             {
-                MessageBox.Show("サムネイルを表示するフォルダが存在しません" + Environment.NewLine + this.ThumNailDirPath);
+                MessageBox.Show("サムネイルを表示するフォルダが存在しないか、画像ファイルがありません。" + Environment.NewLine + this.m_ThumNailDirPath);
                 return;
             }
 
+            if (ListBoxTumnail.Items.Count != 0)
+            {
+                ListBoxTumnail.Items.Clear();
+            }
 
-            ListBoxTumnail.Items.Clear();
-            string[] files = Directory.GetFiles(this.ThumNailDirPath);
             foreach (string file in files)
             {
-                _thumnail.Add(new Thumnail(file));
+                m_thumnail.Add(new Thumnail(file));
             }
-            ListBoxTumnail.ItemsSource = _thumnail;
+            ListBoxTumnail.ItemsSource = m_thumnail;
         }
 
         // サンプルアプリとはふるまい違うけど、こちらの方がパスを貼り付けできるので便利
@@ -108,7 +115,7 @@ namespace Phase4
 
             if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                this.ThumNailDirPath = dlg.FileName;
+                this.m_ThumNailDirPath = dlg.FileName;
                 IsSuccess = true;
             }
             return IsSuccess;
@@ -130,18 +137,21 @@ namespace Phase4
             }
             return IsSuccess;
         }
-    }
 
-    // TODO：別ファイルへ引っ越し
-    public sealed class Thumnail
-    {
-        public string FilePath { get; set; }
-        public string FileName { get; set; }
-
-        public Thumnail(string filepath)
+        private Boolean GetFileList(ref string[] files)
         {
-            this.FilePath = filepath;
-            this.FileName = Path.GetFileName(filepath);
+            Boolean IsSuccess = false;
+            if (Directory.Exists(this.m_ThumNailDirPath))
+            {
+                string[] AllFile = Directory.GetFiles(this.m_ThumNailDirPath);
+                files = AllFile.Where(file => m_TargetExts.Any(pattern => file.ToLower().EndsWith(pattern))).ToArray();
+
+                if (files.Length > 0)
+                {
+                    IsSuccess = true;
+                }
+            }
+            return IsSuccess;
         }
     }
 }
