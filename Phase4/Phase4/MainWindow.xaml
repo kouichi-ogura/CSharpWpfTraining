@@ -49,6 +49,13 @@
             <Setter Property="IsSnapToTickEnabled" Value="True"/>
             <Setter Property="Width" Value="60"/>
         </Style>
+
+        <Style TargetType="ListBox" x:Key="ListBoxTemplate">
+            <Setter Property="MinHeight" Value="80"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+        </Style>
     </Window.Resources>
 
     <DockPanel>
@@ -93,15 +100,27 @@
         <!--TODO：サムネイルの表示TreeView ListBox ListView-->
         <!--small Height="70"-->
         <!--large Height="130"-->
-        <ListBox x:Name="ListBoxTumnail"
+        <!--<ListBox x:Name="ListBoxTumnail"
                  VerticalAlignment="Top"
                  HorizontalAlignment="Left"
                  VerticalContentAlignment="Stretch" 
                  HorizontalContentAlignment="Stretch" 
                  Height="100"
-                 DockPanel.Dock="Top">
+                 DockPanel.Dock="Top">-->
+
+        <ListBox x:Name="ListBoxTumnail" DockPanel.Dock="Top" Style="{StaticResource ListBoxTemplate}" >
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <!--サムネイルを横に並べる-->
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
             <ListBox.ItemTemplate>
                 <DataTemplate>
+
+                    <!--TODO:Horizontalをつけないと、ファイル名が表示されない-->
                     <StackPanel Orientation="Horizontal">
                         <!--TODO:ListBoxを横に並べたい-->
 
@@ -116,13 +135,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <!--<ListView Height="100" DockPanel.Dock="Top">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>-->
 
         <!--<StackPanel Orientation="Vertical">を設定していると、スクロールバーが常にDisableになる-->
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
