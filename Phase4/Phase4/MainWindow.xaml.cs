@@ -32,7 +32,7 @@ namespace Phase4
         }
 
         // xamlのLoadedで定義したメソッド。
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             LoadSetting();
             ListBoxTumnail.SelectionMode = SelectionMode.Single;
@@ -45,6 +45,7 @@ namespace Phase4
         {
             SaveSetting();
         }
+
         private void LoadSetting()
         {
             // 不要（再読み込み時に使用）

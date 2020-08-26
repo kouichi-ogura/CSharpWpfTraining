@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Phase4"
         mc:Ignorable="d"
         Title="MainWindow" Height="520" Width="880"
-        Loaded="Window_Loaded"
+        Loaded="WindowLoaded"
         Closing="WindowClosing">
 
     <Window.Resources>
