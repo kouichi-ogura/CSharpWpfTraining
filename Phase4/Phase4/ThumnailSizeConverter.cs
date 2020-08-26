@@ -12,6 +12,7 @@ namespace Phase4
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            //intでキャストすると、値がとれなかった。デバッガで参照すると数値が入っているが何故か不明。。
             String size_name = "";
             switch ((double)value)
             {
@@ -19,9 +20,7 @@ namespace Phase4
                     size_name = "Small";
                     break;
 
-                default:
-                // no break
-
+                default:    // no break
                 case 2:
                     size_name = "Middle";
                     break;
