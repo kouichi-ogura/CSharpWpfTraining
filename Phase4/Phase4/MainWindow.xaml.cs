@@ -47,14 +47,14 @@ namespace Phase4
         }
         private void LoadSetting()
         {
-            // 不要（？）
+            // 不要（再読み込み時に使用）
             //Properties.Settings.Default.Reload();
 
             this.Left = Properties.Settings.Default.ScreenLeft;
             this.Top = Properties.Settings.Default.ScreenTop;
             this.Width = Properties.Settings.Default.ScreenWidth;
             this.Height = Properties.Settings.Default.ScreenHeight;
-            TextDirName.Text = Properties.Settings.Default.m_ThumNailDirPath;
+            TextDirName.Text = Properties.Settings.Default.ThumnailDirPath;
             TextFileName.Text = Properties.Settings.Default.TextFileName;
         }
 
@@ -64,7 +64,7 @@ namespace Phase4
             Properties.Settings.Default.ScreenTop = this.Top;
             Properties.Settings.Default.ScreenWidth = this.Width;
             Properties.Settings.Default.ScreenHeight = this.Height;
-            Properties.Settings.Default.m_ThumNailDirPath = TextDirName.Text;
+            Properties.Settings.Default.ThumnailDirPath = TextDirName.Text;
             Properties.Settings.Default.TextFileName = TextFileName.Text;
 
             Properties.Settings.Default.Save();

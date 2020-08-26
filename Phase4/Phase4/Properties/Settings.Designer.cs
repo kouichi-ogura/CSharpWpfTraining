@@ -86,12 +86,12 @@ namespace Phase4.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("C:\\tmp")]
-        public string m_ThumNailDirPath {
+        public string ThumnailDirPath {
             get {
-                return ((string)(this["m_ThumNailDirPath"]));
+                return ((string)(this["ThumnailDirPath"]));
             }
             set {
-                this["m_ThumNailDirPath"] = value;
+                this["ThumnailDirPath"] = value;
             }
         }
     }

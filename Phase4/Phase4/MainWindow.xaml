@@ -24,9 +24,8 @@
 
         <Style TargetType="Button" x:Key="ButtonTemplate">
             <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Width" Value="30"/>
-            <Setter Property="Margin" Value="0,10,0,0"/>
         </Style>
 
         <Style TargetType="Label" x:Key="LabelTemplate">
@@ -57,6 +56,7 @@
             <Setter Property="SelectionMode" Value="Single"/>
         </Style>
 
+        <!--Converterメソッド-->
         <local:ImageConverter x:Key="ImageConverter"/>
     </Window.Resources>
 
@@ -85,15 +85,15 @@
             </GroupBox>
             <GroupBox Header="回転" Style="{StaticResource GroupBoxTemplate}" DockPanel.Dock="Left" >
                 <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
-                    <!--Labelだと、StringFormatでうまく文字が表示できなかった
-                <Label Content="{Binding ElementName=SliderAngle, Path=Value, StringFormat={0:0000}}" Style="{StaticResource LabelTemplate}" />-->
+                    <!--Labelだと、StringFormatでうまく文字が表示できない
+                    <Label Content="{Binding ElementName=SliderAngle, Path=Value, StringFormat={0:0000}}" Style="{StaticResource LabelTemplate}" />-->
                     <TextBlock Text="{Binding ElementName=SliderAngle, Path=Value, StringFormat={}{0:000} 度:}" Style="{StaticResource TextBlockTemplate}" />
                     <Slider Name="SliderAngle" Style="{StaticResource SliderTemplate}"
                         Minimum="0" Maximum="360" TickFrequency="1" SmallChange="1" LargeChange="90" Value="0"/>
                 </StackPanel>
             </GroupBox>
 
-            <!--TODO：ウィンドウ右端に吸着してくれない-->
+            <!--TODO：ウィンドウ右端に吸着しない-->
             <GroupBox Header="ファイル" Style="{StaticResource GroupBoxTemplate}" Width="433" DockPanel.Dock="Right">
                 <StackPanel Orientation="Vertical" Style="{StaticResource StackPanelInGroupBoxTemplate}" >
                     <!--テキストボックスの値を変更されるとサムネイルが不正動作するのでReadOnlyにする-->
@@ -128,17 +128,9 @@
 
                     <!--Memo：WrapPanelのOrienataionがVerticalの場合、StackPanelのOrienataionをHorizontalにしないと、ファイル名が表示されない-->
                     <StackPanel>
+                        <!--TODO:サムネイルのサイズを可変-->
                         <Image Source="{Binding FilePath, Converter={StaticResource ImageConverter}}" Stretch="Fill"/>
-                        <TextBlock Text="{Binding FileName}" />
-
-                        <!--<Image Source="{Binding FilePath, Converter={ImageConverter}" Stretch="Fill"/>-->
-
-                        <!--TODO:お試しでテキストコントロールのファイルを表示-->
-                        <!--<Image Source="{Binding ElementName=TextFileName, Path=Text}" />
-                        <TextBlock Text="{Binding ElementName=TextFileName, Path=Text}" />-->
-                        <!--TODO:対象フォルダからファイル取得
-                        <Image Source="{Binding ElementName=_dtos, Path=FilePath}" />
-                        <TextBlock Text="{Binding ElementName=_dtos, Path=FileName}" />-->
+                        <TextBlock Text="{Binding FileName}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -147,9 +139,7 @@
         <!--<StackPanel Orientation="Vertical">を設定していると、スクロールバーが常にDisableになる-->
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <!--「Stretch="None"」にしないとScalingが効かない-->
-            <!--<Image Name="ImageView" Stretch="None" Source="{Binding ElementName=TextFileName, Path=Text}" >-->
             <Image Name="ImageView" Stretch="None" Source="{Binding ElementName=ListBoxTumnail, Path=SelectedItem.FilePath}" >
-
                 <Image.LayoutTransform>
                     <TransformGroup>
                         <RotateTransform Angle="{Binding ElementName=SliderAngle, Path=Value}"/>
