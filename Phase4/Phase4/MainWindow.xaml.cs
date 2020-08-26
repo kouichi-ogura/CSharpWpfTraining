@@ -7,8 +7,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-//using System.Windows.Automation.Peers;
-//using System.Windows.Forms;
 
 namespace Phase4
 {
@@ -17,8 +15,7 @@ namespace Phase4
     /// </summary>
     public partial class MainWindow : Window
     {
-        //MyListBox.SelectionMode = SelectionMode.Single;
-        private string[] m_TargetExts = { ".jpg", ".bmp", ".png", ".tiff", ".gif" };
+        private readonly string[] m_TargetExts = { ".jpg", ".bmp", ".png", ".tiff", ".gif" };
 
         public MainWindow()
         {
@@ -31,16 +28,14 @@ namespace Phase4
             //SaveSetting();
         }
 
-        // xamlのLoadedで定義したメソッド。
+        // xamlのLoadedで定義したメソッド
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             LoadSetting();
-            ListBoxTumnail.SelectionMode = SelectionMode.Single;
-
             DrawThumnail();
         }
 
-        // xamlのClosingで定義したメソッド。
+        // xamlのClosingで定義したメソッド
         private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SaveSetting();
@@ -48,9 +43,6 @@ namespace Phase4
 
         private void LoadSetting()
         {
-            // 不要（再読み込み時に使用）
-            //Properties.Settings.Default.Reload();
-
             this.Left = Properties.Settings.Default.ScreenLeft;
             this.Top = Properties.Settings.Default.ScreenTop;
             this.Width = Properties.Settings.Default.ScreenWidth;
@@ -78,39 +70,21 @@ namespace Phase4
                 MessageBox.Show("フォルダが選択されていません");
                 return;
             }
-
             DrawThumnail();
         }
 
-        private void DrawThumnail()
+        private void ButtonFormOpenDialog_Click(object sender, RoutedEventArgs e)
         {
-            string[] files = null;
-            if (!GetFileList(ref files))
+            if (!GetDirectoryNameForForm())
             {
-                MessageBox.Show("サムネイルを表示するフォルダが存在しないか、画像ファイルがありません。" + Environment.NewLine + this.TextDirName);
+                MessageBox.Show("フォルダが選択されていません");
                 return;
             }
-
-            // クラスをローカル変数にしたので、クリア削除は不要
-            //if (ListBoxTumnail.Items.Count != 0)
-            //{
-            //    Exception
-            //    ListBoxTumnail.Items.Clear();
-
-            //    Never displayed
-            //    ListBoxTumnail.ClearValue(ListBox.ItemsSourceProperty);
-            //}
-
-            var thumnail = new List<Thumnail>();
-            foreach (string file in files)
-            {
-                thumnail.Add(new Thumnail(file));
-            }
-
-            DataContext = thumnail;
+            DrawThumnail();
         }
 
-        // サンプルアプリとはふるまい違うけど、こちらの方がパスを貼り付けできるので便利
+
+        // フォルダパスをコピペで指定できるUI
         private Boolean GetDirectoryName()
         {
             Boolean IsSuccess = false;
@@ -127,7 +101,7 @@ namespace Phase4
             return IsSuccess;
         }
 
-        // サンプルアプリと同じふるまい
+        // フォルダパスをツリー上で掘っていくUI
         private Boolean GetDirectoryNameForForm()
         {
             Boolean IsSuccess = false;
@@ -159,6 +133,34 @@ namespace Phase4
                 IsSuccess = true;
             }
             return IsSuccess;
+        }
+
+        private void DrawThumnail()
+        {
+            string[] files = null;
+            if (!GetFileList(ref files))
+            {
+                MessageBox.Show("サムネイルを表示するフォルダが存在しないか、画像ファイルがありません。" + Environment.NewLine + this.TextDirName);
+                return;
+            }
+
+            // クラスをローカル変数にしたので、クリア処理は不要
+            //if (ListBoxTumnail.Items.Count != 0)
+            //{
+            //    Exception
+            //    ListBoxTumnail.Items.Clear();
+
+            //    Never displayed
+            //    ListBoxTumnail.ClearValue(ListBox.ItemsSourceProperty);
+            //}
+
+            var thumnail = new List<Thumnail>();
+            foreach (string file in files)
+            {
+                thumnail.Add(new Thumnail(file));
+            }
+
+            DataContext = thumnail;
         }
 
         private Boolean GetFileList(ref string[] files)
