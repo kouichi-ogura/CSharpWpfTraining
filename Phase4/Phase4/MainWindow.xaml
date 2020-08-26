@@ -16,19 +16,19 @@
             <Setter Property="Margin" Value="0,10,0,0"/>
         </Style>
 
-        <Style TargetType="GroupBox" x:Key="GroupBoxTemplate">
-            <Setter Property="Height" Value="70"/>
+        <Style TargetType="GroupBox">
+            <Setter Property="Height" Value="80"/>
             <Setter Property="Width" Value="120"/>
             <Setter Property="Margin" Value="2,0,0,0"/>
         </Style>
 
-        <Style TargetType="Button" x:Key="ButtonTemplate">
+        <Style TargetType="Button">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Width" Value="30"/>
         </Style>
 
-        <Style TargetType="Label" x:Key="LabelTemplate">
+        <Style TargetType="Label">
             <Setter Property="Height" Value="30"/>
             <Setter Property="Margin" Value="0,-5,0,0"/>
         </Style>
@@ -38,18 +38,14 @@
             <Setter Property="Margin" Value="0,0,5,0"/>
         </Style>
 
-        <Style TargetType="TextBox" x:Key="TextBoxTemplate">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="30"/>
-        </Style>
-
-        <Style TargetType="Slider" x:Key="SliderTemplate">
+        <Style TargetType="Slider">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="IsSnapToTickEnabled" Value="True"/>
             <Setter Property="Width" Value="60"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
         </Style>
 
-        <Style TargetType="ListBox" x:Key="ListBoxTemplate">
+        <Style TargetType="ListBox">
             <Setter Property="MinHeight" Value="80"/>
             <Setter Property="Height" Value="Auto"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -58,43 +54,51 @@
 
         <!--Converterメソッド-->
         <local:ImageConverter x:Key="ImageConverter"/>
+        <local:ThumnailSizeNameConverter x:Key="ThumnailSizeNameConverter"/>
+        <local:ThumnailSizeWidthConverter x:Key="ThumnailSizeWidthConverter"/>
+        <local:ThumnailSizeHeightConverter x:Key="ThumnailSizeHeightConverter"/>
+        
     </Window.Resources>
 
     <DockPanel>
         <!--Imageコントロールの画像が上に張り付く
         <StackPanel Orientation="Vertical">-->
-        <StackPanel Orientation=" Horizontal" DockPanel.Dock="Top">
-            <GroupBox Header="操作" Style="{StaticResource GroupBoxTemplate}" Width="50" DockPanel.Dock="Left">
-                <Button Name="ButtonOpenDialog" Content="開く" Style="{StaticResource ButtonTemplate}" Click="ButtonOpenDialog_Click"/>
+        <StackPanel Orientation=" Horizontal" DockPanel.Dock="Top" >
+            <GroupBox Header="操作" Width="50" DockPanel.Dock="Left">
+                <StackPanel Orientation="Vertical" Style="{StaticResource StackPanelInGroupBoxTemplate}" >
+                    <Button Name="ButtonOpenDialog" Content="開く" Click="ButtonOpenDialog_Click"/>
+                    <Button Name="ButtonFormOpenDialog" Content="開く" Click="ButtonFormOpenDialog_Click"/>
+                </StackPanel>
             </GroupBox>
-            <GroupBox Header="サムネイルのサイズ" Style="{StaticResource GroupBoxTemplate}" DockPanel.Dock="Left" >
+            <GroupBox Header="サムネイルのサイズ" DockPanel.Dock="Left" >
                 <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
-                    <Label Content="Middle" Style="{StaticResource LabelTemplate}" />
-                    <Slider Name="SliderThumbnail" Style="{StaticResource SliderTemplate}"
+                    <TextBlock Text="{Binding ElementName=SliderThumbnail, Path=Value, Converter={StaticResource ThumnailSizeNameConverter}}"/>
+                    <!--<TextBlock Text="{Binding ElementName=SliderThumbnail, Path=Value, Converter={StaticResource ThumnailSizeWidthConverter}}"/>-->
+                    <Slider Name="SliderThumbnail" 
                         Minimum="1" Maximum="3" TickFrequency="1" SmallChange="1" LargeChange="1" Value="2"
                         TickPlacement="BottomRight"/>
                 </StackPanel>
             </GroupBox>
             <!--TODO：マウスホイールで拡大/縮小したい-->
-            <GroupBox Header="拡大/縮小" Style="{StaticResource GroupBoxTemplate}" DockPanel.Dock="Left" >
+            <GroupBox Header="拡大/縮小" DockPanel.Dock="Left" >
                 <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
                     <TextBlock Text="{Binding ElementName=SliderScale, Path=Value, StringFormat={}{0:0.0} 倍:}" Style="{StaticResource TextBlockTemplate}" />
-                    <Slider Name="SliderScale" Style="{StaticResource SliderTemplate}"
+                    <Slider Name="SliderScale"
                         Minimum="0.1" Maximum="5.0" TickFrequency="0.1" SmallChange="0.1" LargeChange="1.0" Value="1.0"/>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="回転" Style="{StaticResource GroupBoxTemplate}" DockPanel.Dock="Left" >
+            <GroupBox Header="回転" DockPanel.Dock="Left" >
                 <StackPanel Style="{StaticResource StackPanelInGroupBoxTemplate}" >
                     <!--Labelだと、StringFormatでうまく文字が表示できない
-                    <Label Content="{Binding ElementName=SliderAngle, Path=Value, StringFormat={0:0000}}" Style="{StaticResource LabelTemplate}" />-->
+                    <Label Content="{Binding ElementName=SliderAngle, Path=Value, StringFormat={0:0000}}" />-->
                     <TextBlock Text="{Binding ElementName=SliderAngle, Path=Value, StringFormat={}{0:000} 度:}" Style="{StaticResource TextBlockTemplate}" />
-                    <Slider Name="SliderAngle" Style="{StaticResource SliderTemplate}"
+                    <Slider Name="SliderAngle"
                         Minimum="0" Maximum="360" TickFrequency="1" SmallChange="1" LargeChange="90" Value="0"/>
                 </StackPanel>
             </GroupBox>
 
             <!--TODO：ウィンドウ右端に吸着しない-->
-            <GroupBox Header="ファイル" Style="{StaticResource GroupBoxTemplate}" Width="433" DockPanel.Dock="Right">
+            <GroupBox Header="ファイル" Width="450" DockPanel.Dock="Right">
                 <StackPanel Orientation="Vertical" Style="{StaticResource StackPanelInGroupBoxTemplate}" >
                     <!--テキストボックスの値を変更されるとサムネイルが不正動作するのでReadOnlyにする-->
                     <TextBox Name="TextDirName" IsReadOnly="True"/>
@@ -114,7 +118,7 @@
                  Height="100"
                  DockPanel.Dock="Top">-->
 
-        <ListBox x:Name="ListBoxTumnail" DockPanel.Dock="Top" Style="{StaticResource ListBoxTemplate}"  ItemsSource="{Binding}">
+        <ListBox x:Name="ListBoxTumnail" DockPanel.Dock="Top" ItemsSource="{Binding}">
 
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -129,7 +133,10 @@
                     <!--Memo：WrapPanelのOrienataionがVerticalの場合、StackPanelのOrienataionをHorizontalにしないと、ファイル名が表示されない-->
                     <StackPanel>
                         <!--TODO:サムネイルのサイズを可変-->
-                        <Image Source="{Binding FilePath, Converter={StaticResource ImageConverter}}" Stretch="Fill"/>
+                        <Image Stretch="Fill"
+                               Source="{Binding FilePath, Converter={StaticResource ImageConverter}}"
+                               Width="{Binding ElementName=SliderThumbnail, Path=Value, Converter={StaticResource ThumnailSizeWidthConverter}}"
+                               Height="{Binding ElementName=SliderThumbnail, Path=Value, Converter={StaticResource ThumnailSizeHeightConverter}}"/>
                         <TextBlock Text="{Binding FileName}"/>
                     </StackPanel>
                 </DataTemplate>
