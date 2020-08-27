@@ -8,14 +8,7 @@ namespace Phase4
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            try
-            {
-                return new BitmapImage(new Uri(value.ToString()));
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            return new BitmapImage(new Uri(value.ToString()));
         }
 
         //-----------------------------------------------------------------------------------------------

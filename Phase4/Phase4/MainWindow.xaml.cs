@@ -17,6 +17,11 @@ namespace Phase4
     {
         private readonly string[] m_TargetExts = { ".jpg", ".bmp", ".png", ".tiff", ".gif" };
 
+        private readonly string m_MsgNotSelectDir = "フォルダが選択されていません";
+        private readonly string m_MsgSelectThumnailDir = "サムネイル表示対象のフォルダ選択";
+        private readonly string m_MsgFileFilter = "テキストファイル (*.txt)|*.txt|全てのファイル (*.*)|*.*";
+        private readonly string m_MsgUnknownDir = "サムネイルを表示するフォルダが存在しないか、画像ファイルがありません。";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -67,7 +72,7 @@ namespace Phase4
         {
             if (!GetDirectoryName())
             {
-                MessageBox.Show("フォルダが選択されていません");
+                MessageBox.Show(m_MsgNotSelectDir);
                 return;
             }
             DrawThumnail();
@@ -77,18 +82,17 @@ namespace Phase4
         {
             if (!GetDirectoryNameForForm())
             {
-                MessageBox.Show("フォルダが選択されていません");
+                MessageBox.Show(m_MsgNotSelectDir);
                 return;
             }
             DrawThumnail();
         }
 
-
         // フォルダパスをコピペで指定できるUI
         private Boolean GetDirectoryName()
         {
             Boolean IsSuccess = false;
-            var dlg = new CommonOpenFileDialog("サムネイル表示対象のフォルダ選択")
+            var dlg = new CommonOpenFileDialog(m_MsgSelectThumnailDir)
             {
                 IsFolderPicker = true
             };
@@ -107,7 +111,7 @@ namespace Phase4
             Boolean IsSuccess = false;
             var dlg = new System.Windows.Forms.FolderBrowserDialog()
             {
-                Description = "サムネイル表示対象のフォルダ選択"
+                Description = m_MsgSelectThumnailDir
             };
 
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -124,7 +128,7 @@ namespace Phase4
             Boolean IsSuccess = false;
             var dlg = new OpenFileDialog()
             {
-                Filter = "テキストファイル (*.txt)|*.txt|全てのファイル (*.*)|*.*"
+                Filter = m_MsgFileFilter
             };
 
             if (dlg.ShowDialog() == true)
@@ -140,7 +144,7 @@ namespace Phase4
             string[] files = null;
             if (!GetFileList(ref files))
             {
-                MessageBox.Show("サムネイルを表示するフォルダが存在しないか、画像ファイルがありません。" + Environment.NewLine + this.TextDirName);
+                MessageBox.Show(m_MsgUnknownDir + Environment.NewLine + this.TextDirName);
                 return;
             }
 
