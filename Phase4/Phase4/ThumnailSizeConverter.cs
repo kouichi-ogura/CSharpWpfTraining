@@ -10,23 +10,26 @@ namespace Phase4
 {
     public class ThumnailSizeNameConverter : IValueConverter
     {
+        private readonly string m_ThumnailSizeStrS = "Small";
+        private readonly string m_ThumnailSizeStrM = "Middle";
+        private readonly string m_ThumnailSizeStrL = "Large";
+
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            //intでキャストすると、値がとれなかった。デバッガで参照すると数値が入っているが何故か不明。。
             String size_name = "";
-            switch ((double)value)
+            switch (System.Convert.ToInt32(value))
             {
                 case 1:
-                    size_name = "Small";
+                    size_name = m_ThumnailSizeStrS;
                     break;
 
                 default:    // no break
                 case 2:
-                    size_name = "Middle";
+                    size_name = m_ThumnailSizeStrM;
                     break;
 
                 case 3:
-                    size_name = "Large";
+                    size_name = m_ThumnailSizeStrL;
                     break;
             }
             return size_name;
@@ -40,9 +43,10 @@ namespace Phase4
 
     public class ThumnailSizeWidthConverter : IValueConverter
     {
+        private readonly int m_ThumnailScaleWidth = 40;
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return (double)value * 40;
+            return (double)value * m_ThumnailScaleWidth;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -53,9 +57,10 @@ namespace Phase4
 
     public class ThumnailSizeHeightConverter : IValueConverter
     {
+        private readonly int m_ThumnailScaleHeight = 30;
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return (double)value * 30;
+            return (double)value * m_ThumnailScaleHeight;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
