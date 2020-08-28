@@ -119,7 +119,7 @@
                     <!--Memo：WrapPanelのOrienataionがVerticalの場合、StackPanelのOrienataionをHorizontalにしないと、ファイル名が表示されない-->
                     <StackPanel>
                         <Image Stretch="Fill"
-                               Source="{Binding FilePath, Converter={StaticResource ImageConverter}}"
+                               Source="{Binding FileFullpath, Converter={StaticResource ImageConverter}}"
                                Width="{Binding ElementName=SliderThumbnail, Path=Value, Converter={StaticResource ThumnailSizeWidthConverter}}"
                                Height="{Binding ElementName=SliderThumbnail, Path=Value, Converter={StaticResource ThumnailSizeHeightConverter}}"/>
                         <TextBlock Text="{Binding FileName}"/>
@@ -131,7 +131,7 @@
         <!--<StackPanel Orientation="Vertical">を設定していると、スクロールバーが常にDisableになる-->
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
             <!--「Stretch="None"」にしないとScalingが効かない-->
-            <Image Name="ImageView" Stretch="None" Source="{Binding ElementName=ListBoxTumnail, Path=SelectedItem.FilePath}" >
+            <Image Name="ImageView" Stretch="None" Source="{Binding ElementName=ListBoxTumnail, Path=SelectedItem.FileFullpath}" >
                 <Image.LayoutTransform>
                     <TransformGroup>
                         <RotateTransform Angle="{Binding ElementName=SliderAngle, Path=Value}"/>
