@@ -31,7 +31,7 @@ namespace Phase4
 
             Int32 Idx = Int32.Parse(value.ToString());
             // TODO：XamlのSliderThumbnail値から範囲値を取得したい
-            if (1 > Idx || Idx > 3 )
+            if (Idx < 1 || 3 < Idx )
             {
                 return null;
             }
