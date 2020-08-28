@@ -10,29 +10,33 @@ namespace Phase4
 {
     public class ThumnailSizeNameConverter : IValueConverter
     {
-        private readonly string m_ThumnailSizeStrS = "Small";
-        private readonly string m_ThumnailSizeStrM = "Middle";
-        private readonly string m_ThumnailSizeStrL = "Large";
+        // Dictionaryを使用せずswitchを使用するときに使用
+        // private readonly string m_ThumnailSizeStrS = "Small";
+        // private readonly string m_ThumnailSizeStrM = "Middle";
+        // private readonly string m_ThumnailSizeStrL = "Large";
+
+        Dictionary<int, string> m_SizeName = new Dictionary<int, string>()
+        { {1, "Small "},
+          {2, "Middle"},
+          {3, "Large "}
+        };
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            String size_name = "";
-            switch (System.Convert.ToInt32(value))
+            //型変換の手法はいくつかある
+            //int value1 = System.Convert.ToInt32(value);
+            //int value2 = Int32.Parse(value.ToString());
+            //int value3 = 0;
+            //Int32.TryParse(value.ToString(), out value3);
+
+            Int32 Idx = Int32.Parse(value.ToString());
+            // TODO：XamlのSliderThumbnail値から範囲値を取得したい
+            if (1 > Idx || Idx > 3 )
             {
-                case 1:
-                    size_name = m_ThumnailSizeStrS;
-                    break;
-
-                default:    // no break
-                case 2:
-                    size_name = m_ThumnailSizeStrM;
-                    break;
-
-                case 3:
-                    size_name = m_ThumnailSizeStrL;
-                    break;
+                return null;
             }
-            return size_name;
+
+            return m_SizeName[Idx];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
