@@ -2,8 +2,6 @@
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -169,18 +167,19 @@ namespace Phase4
 
         private Boolean GetFileList(ref string[] files)
         {
-            Boolean IsSuccess = false;
-            if (Directory.Exists(TextDirName.Text))
+            if (! Directory.Exists(TextDirName.Text))
             {
-                string[] AllFile = Directory.GetFiles(TextDirName.Text);
-                files = AllFile.Where(file => m_TargetExts.Any(pattern => file.ToLower().EndsWith(pattern))).ToArray();
-
-                if (files.Length > 0)
-                {
-                    IsSuccess = true;
-                }
+                return false;
             }
-            return IsSuccess;
+
+            string[] AllFile = Directory.GetFiles(TextDirName.Text);
+            files = AllFile.Where(file => m_TargetExts.Any(pattern => file.ToLower().EndsWith(pattern))).ToArray();
+            if (files.Length == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
