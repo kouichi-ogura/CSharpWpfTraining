@@ -142,7 +142,7 @@ namespace Phase4
             string[] files = null;
             if (!GetFileList(ref files))
             {
-                MessageBox.Show(m_MsgUnknownDir + Environment.NewLine + this.TextDirName);
+                MessageBox.Show(m_MsgUnknownDir + Environment.NewLine + this.TextDirName.Text);
                 return;
             }
 
