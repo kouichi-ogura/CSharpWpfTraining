@@ -19,7 +19,7 @@ namespace Phase4
             //return img;
 
             // 解決策1：リソースを解放できる
-            //var ms = new MemoryStream(File.ReadAllBytes(value.ToString()));
+            //MemoryStream ms = new MemoryStream(File.ReadAllBytes(value.ToString()));
             //WriteableBitmap wb = new WriteableBitmap(BitmapFrame.Create(ms));
             //ms.Close();
             //return wb;
